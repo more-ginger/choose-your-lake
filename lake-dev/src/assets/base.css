@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Trispace-SemiExpanded-ExtraBold';
+  font-style: normal;
+  src: local('Trispace_SemiExpanded-ExtraBold'), url(@/assets/fonts/Trispace_SemiExpanded-ExtraBold.ttf) format('truetype');
+}
+
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
   --vt-c-white: #ffffff;
@@ -8,7 +14,7 @@
   --vt-c-black-soft: #222222;
   --vt-c-black-mute: #282828;
 
-  --vt-c-indigo: #2c3e50;
+  --vt-c-indigo: #1f1f1f;
 
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
@@ -34,6 +40,15 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+}
+
+/* semantic size variables */
+:root {
+  --inner-padding: 1rem;
+  
+
+  --h1-alternative-font-size: 30px;
+  --h1-type: 'Trispace-SemiExpanded-ExtraBold';
 }
 
 @media (prefers-color-scheme: dark) {
@@ -71,3 +86,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+

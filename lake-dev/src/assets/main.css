@@ -1,13 +1,16 @@
 @import './base.css';
 
 body {
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
+  width: 100vw;
+  height: 100vh;
 }
 
 #app {
+  width: 100vw;
+  height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 
 
@@ -38,4 +41,75 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   } */
+}
+
+@media (max-width: 600px) {
+
+  main {
+    background-color: aquamarine;
+    /* display: table; */
+    height: 100%;
+  }
+
+  .home {
+    height: 90%;
+    /* background-color: azure; */
+  }
+
+  .home > .graphic {
+    height: 80%;
+    position: relative;
+  }
+
+  .graphic > .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(116, 75, 75, 0.576); */
+  }
+
+  .title > .inner-title {
+    margin: 0 auto;
+    width: 90%;
+    text-align: left;
+    padding: 1rem;
+  }
+
+  .inner-title > h1 {
+    font-size: var(--h1-alternative-font-size);
+    font-family: var(--h1-type);
+  }
+
+  .graphic > .canvas-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 2;
+  }
+
+  .home > .searchbar {
+    height: 20%;
+  }
+  
+  footer, header {
+    background-color: pink;
+    height: 5%;
+  }
+}
+
+@media (min-width: 480px) {
+  body {
+    background-color: lightblue;
+  }
+
+}
+
+@media (min-width: 600px) {
+
+  body {
+    background-color: sandybrown;
+  }
 }
