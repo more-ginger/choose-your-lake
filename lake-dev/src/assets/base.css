@@ -1,4 +1,10 @@
 @font-face {
+  font-family: 'Trispace-SemiCondensed-Regular';
+  font-style: normal;
+  src: local('Trispace_SemiCondensed-Regular'), url(@/assets/fonts/Trispace_SemiCondensed-Regular.ttf) format('truetype');
+}
+
+@font-face {
   font-family: 'Trispace-SemiExpanded-ExtraBold';
   font-style: normal;
   src: local('Trispace_SemiExpanded-ExtraBold'), url(@/assets/fonts/Trispace_SemiExpanded-ExtraBold.ttf) format('truetype');
@@ -25,6 +31,7 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --custom-text-highlight-1: rgb(0, 60, 255);
 }
 
 /* semantic color variables for this project */
@@ -38,6 +45,7 @@
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
+  --color-links: var(--custom-text-highlight-1);
 
   --section-gap: 160px;
 }
@@ -45,10 +53,11 @@
 /* semantic size variables */
 :root {
   --inner-padding: 1rem;
-  
+
 
   --h1-alternative-font-size: 30px;
   --h1-type: 'Trispace-SemiExpanded-ExtraBold';
+  --p-type: 'Trispace-SemiCondensed-Regular';
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,5 +95,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-

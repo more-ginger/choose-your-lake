@@ -1,10 +1,44 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true,
+<script>
+import Dropdown from 'primevue/dropdown';
+import ThreejsCanva from './Threejs-Canva.vue'
+import { ref } from "vue";
+
+const selectedCity = ref();
+
+const cities = ref([
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+]);
+
+export default {
+  components: {
+    Dropdown,
+    ThreejsCanva
   },
-});
+  data () {
+    return {
+      cities,
+      selectedCity,
+      canvasWidth: 0,
+      canvasHeight: 0,
+      mounted: false
+    }
+  },
+  mounted () {
+    this.getContainerSizes()
+    this.mounted = true
+  },
+  methods: {
+    getContainerSizes(){
+      this.canvasWidth = this.$refs['canvas-inner'].clientWidth
+      this.canvasHeight = this.$refs['canvas-inner'].clientHeight
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -16,12 +50,24 @@ defineProps({
         </div>
       </div>
       <div class="canvas-container">
-        <canvas></canvas>
+        <div class="canvas-inner-container" ref="canvas-inner"> 
+          <ThreejsCanva 
+            v-if="mounted === true"
+            :canvasWidth=canvasWidth 
+            :canvasHeight=canvasHeight
+          />
+        </div>
       </div>
     </div>
     <div class="searchbar container-inner">
       <div class="search-bar">
-        <input type="text" placeholder="Choose a lake" />
+        <Dropdown 
+          v-model="selectedCity" 
+          :options="cities" 
+          optionLabel="name" 
+          placeholder="Select a Lake" 
+          class="w-full md:w-14rem" 
+        />
       </div>
     </div>
   </div>

@@ -8,11 +8,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "primevue": "^3.29.2",
+    "three": "^0.152.2",
+    "three-trackballcontrols": "^0.9.0",
     "vue": "^3.3.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/cli-plugin-typescript": "~4.5.12",
-    "vite": "^4.3.5"
+    "vite": "^4.3.5",
+    "volar-service-vetur": "latest"
   }
 }

@@ -3,6 +3,7 @@ import Home from "./components/Home.vue";
 import TopBar from "./components/TopBar.vue";
 import BottomBar from "./components/BottomBar.vue";
 
+
 export default {
   components: {
     Home,

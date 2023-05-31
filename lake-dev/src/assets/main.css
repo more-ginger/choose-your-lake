@@ -4,6 +4,7 @@ body {
   /* background-color: aquamarine; */
   width: 100vw;
   height: 100vh;
+  color: var(--)
 }
 
 #app {
@@ -17,11 +18,27 @@ body {
   font-weight: normal;
 }
 
+p,
+span,
+a,
+ul {
+  font-family: var(--p-type);
+}
+
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: var(--color-links);
   transition: 0.4s;
+}
+
+.p-dropdown {
+  border-bottom: 3px solid black;
+  width: 100%;
+}
+
+.p-dropdown>span {
+  text-align: left;
 }
 
 @media (hover: hover) {
@@ -35,54 +52,44 @@ a,
     display: flex;
     place-items: center;
   }
-
-  /* #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  } */
 }
 
 @media (max-width: 600px) {
 
   main {
-    background-color: aquamarine;
-    /* display: table; */
     height: 100%;
   }
 
   .home {
     height: 90%;
-    /* background-color: azure; */
   }
 
-  .home > .graphic {
+  .home>.graphic {
     height: 80%;
     position: relative;
   }
 
-  .graphic > .title {
+  .graphic>.title {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(116, 75, 75, 0.576); */
   }
 
-  .title > .inner-title {
+  .title>.inner-title {
     margin: 0 auto;
     width: 90%;
     text-align: left;
     padding: 1rem;
   }
 
-  .inner-title > h1 {
+  .inner-title>h1 {
     font-size: var(--h1-alternative-font-size);
     font-family: var(--h1-type);
   }
 
-  .graphic > .canvas-container {
+  .graphic>.canvas-container {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -90,14 +97,59 @@ a,
     z-index: 2;
   }
 
-  .home > .searchbar {
+  .home>.searchbar {
     height: 20%;
   }
-  
-  footer, header {
-    background-color: pink;
+
+  .searchbar>.search-bar {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  footer,
+  header {
     height: 5%;
   }
+
+  header>.container,
+  .container>.inner-container,
+  .top-menu {
+    height: 100%;
+  }
+
+  .canvas-container>.canvas-inner-container {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .top-menu>ul {
+    height: 100%;
+    list-style-type: none;
+    text-align: left;
+    font-family: var(--h1-type);
+  }
+
+  .top-menu>ul>li {
+    display: inline-block;
+    line-height: 250%;
+    width: 100%;
+    height: 100%;
+    background: url('@/assets/img/wave.svg') no-repeat;
+    background-position: left center;
+    background-size: 60px;
+    padding-left: 70px;
+  }
+
+  footer {
+    text-align: left;
+  }
+
+  footer>.container>.inner-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
 }
 
 @media (min-width: 480px) {
