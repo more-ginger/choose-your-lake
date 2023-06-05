@@ -2,15 +2,14 @@
 import Dropdown from 'primevue/dropdown';
 import ThreejsCanva from './Threejs-Canva.vue'
 import { ref } from "vue";
+// import AllLakes from 
 
-const selectedCity = ref();
+const selectedLake = ref();
 
-const cities = ref([
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' }
+const allLakes = ref([
+    { name: 'Hubertussee', code: 'Q1616489' },
+    { name: 'Schäfersee', code: 'Q2258294' },
+    { name: 'Plötzensee', code: 'Q541313' }
 ]);
 
 export default {
@@ -20,8 +19,8 @@ export default {
   },
   data () {
     return {
-      cities,
-      selectedCity,
+      allLakes,
+      selectedLake,
       canvasWidth: 0,
       canvasHeight: 0,
       mounted: false
@@ -45,8 +44,11 @@ export default {
   <div class="home container">
     <div class="graphic container-inner">
       <div class="title">
-        <div class="inner-title">
+        <div class="inner-title" v-if="selectedLake === undefined">
           <h1>00Mln M3 is the daily water consumption of Berliners.</h1>
+        </div>
+        <div class="inner-title" v-else>
+          <h1>{{ selectedLake.name }}</h1>
         </div>
       </div>
       <div class="canvas-container">
@@ -55,6 +57,7 @@ export default {
             v-if="mounted === true"
             :canvasWidth=canvasWidth 
             :canvasHeight=canvasHeight
+            :selectedLake=selectedLake
           />
         </div>
       </div>
@@ -62,9 +65,10 @@ export default {
     <div class="searchbar container-inner">
       <div class="search-bar">
         <Dropdown 
-          v-model="selectedCity" 
-          :options="cities" 
+          v-model="selectedLake" 
+          :options="allLakes" 
           optionLabel="name" 
+          editable
           placeholder="Select a Lake" 
           class="w-full md:w-14rem" 
         />

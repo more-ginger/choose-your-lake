@@ -1,0 +1,474 @@
+{
+    "Q63284050": {
+        "portability(m3)": "undefined",
+        "name": "Spandauer See"
+    },
+    "Q1616489": {
+        "portability(m3)": 42143,
+        "name": "Hubertussee"
+    },
+    "Q1357141": {
+        "portability(m3)": "undefined",
+        "name": "Liepnitzsee"
+    },
+    "Q57416112": {
+        "portability(m3)": "undefined",
+        "name": "Nymphensee"
+    },
+    "Q1813282": {
+        "portability(m3)": "undefined",
+        "name": "Lehnitzsee"
+    },
+    "Q1394216": {
+        "portability(m3)": 890000,
+        "name": "Falkenhagener See"
+    },
+    "Q2258294": {
+        "portability(m3)": 171508,
+        "name": "Schäfersee"
+    },
+    "Q84721903": {
+        "portability(m3)": "undefined",
+        "name": "undefined"
+    },
+    "Q56395569": {
+        "portability(m3)": "undefined",
+        "name": "Springpfuhl"
+    },
+    "Q882857": {
+        "portability(m3)": 4530633,
+        "name": "Groß Glienicker See"
+    },
+    "Q883094": {
+        "portability(m3)": "undefined",
+        "name": "Templiner See"
+    },
+    "Q2010954": {
+        "portability(m3)": 56584,
+        "name": "Obersee"
+    },
+    "Q84075401": {
+        "portability(m3)": "undefined",
+        "name": "Steinbergsee"
+    },
+    "Q1398426": {
+        "portability(m3)": "undefined",
+        "name": "Fauler See"
+    },
+    "Q697916": {
+        "portability(m3)": 26123376,
+        "name": "Tegeler See"
+    },
+    "Q15114169": {
+        "portability(m3)": "undefined",
+        "name": "Haussee"
+    },
+    "Q1570872": {
+        "portability(m3)": 179363,
+        "name": "Halensee"
+    },
+    "Q181494": {
+        "portability(m3)": "undefined",
+        "name": "Jungfernsee"
+    },
+    "Q2329091": {
+        "portability(m3)": "undefined",
+        "name": "Stahnsdorfer See"
+    },
+    "Q18816468": {
+        "portability(m3)": "undefined",
+        "name": "Mühlensee"
+    },
+    "Q26271355": {
+        "portability(m3)": 443049,
+        "name": "Habermannsee"
+    },
+    "Q26271357": {
+        "portability(m3)": 296806,
+        "name": "Butzer See"
+    },
+    "Q1614715": {
+        "portability(m3)": 15974,
+        "name": "Herthasee"
+    },
+    "Q32222182": {
+        "portability(m3)": "undefined",
+        "name": "Petzinsee"
+    },
+    "Q896095": {
+        "portability(m3)": 1938747,
+        "name": "Schlachtensee"
+    },
+    "Q1778289": {
+        "portability(m3)": 40974,
+        "name": "Koenigssee"
+    },
+    "Q1404799": {
+        "portability(m3)": 41153,
+        "name": "Fenn"
+    },
+    "Q258569": {
+        "portability(m3)": 149627,
+        "name": "Lietzensee"
+    },
+    "Q1208924": {
+        "portability(m3)": 41644,
+        "name": "Dianasee"
+    },
+    "Q1263106": {
+        "portability(m3)": 210464,
+        "name": "Hundekehlesee"
+    },
+    "Q895938": {
+        "portability(m3)": 504574,
+        "name": "Grunewaldsee"
+    },
+    "Q453692": {
+        "portability(m3)": 334536,
+        "name": "Kleiner Wannsee"
+    },
+    "Q2360565": {
+        "portability(m3)": "undefined",
+        "name": "Stölpchensee"
+    },
+    "Q1531392": {
+        "portability(m3)": 4530633,
+        "name": "Glienicker See"
+    },
+    "Q3908364": {
+        "portability(m3)": 15416889,
+        "name": "Großer Wannsee"
+    },
+    "Q1236041": {
+        "portability(m3)": "undefined",
+        "name": "Pohlesee"
+    },
+    "Q1392443": {
+        "portability(m3)": "undefined",
+        "name": "Fahrlander See"
+    },
+    "Q1882699": {
+        "portability(m3)": "undefined",
+        "name": "Machnower See"
+    },
+    "Q568396": {
+        "portability(m3)": 543,
+        "name": "Krumme Lanke"
+    },
+    "Q1236813": {
+        "portability(m3)": 42393,
+        "name": "Waldsee"
+    },
+    "Q541313": {
+        "portability(m3)": 274750,
+        "name": "Plötzensee"
+    },
+    "Q1546905": {
+        "portability(m3)": 100015,
+        "name": "Grimnitzsee"
+    },
+    "Q1400862": {
+        "portability(m3)": "undefined",
+        "name": "Großer Samithsee"
+    },
+    "Q108449394": {
+        "portability(m3)": "undefined",
+        "name": "Möwensee"
+    },
+    "Q108458130": {
+        "portability(m3)": "undefined",
+        "name": "Entenpfuhl"
+    },
+    "Q108457984": {
+        "portability(m3)": "undefined",
+        "name": "Sperlingsee"
+    },
+    "Q1793677": {
+        "portability(m3)": 72562,
+        "name": "Teufelssee"
+    },
+    "Q2127445": {
+        "portability(m3)": "undefined",
+        "name": "Rahmer See"
+    },
+    "Q32693073": {
+        "portability(m3)": 260316,
+        "name": "Plötzensee"
+    },
+    "Q1548781": {
+        "portability(m3)": "undefined",
+        "name": "Großer Lienewitzsee"
+    },
+    "Q32065716": {
+        "portability(m3)": "undefined",
+        "name": "Kleiner Lienewitzsee"
+    },
+    "Q1484237": {
+        "portability(m3)": "undefined",
+        "name": "Tiefer See"
+    },
+    "Q1548972": {
+        "portability(m3)": 6620000,
+        "name": "Großer Seddiner See"
+    },
+    "Q624895": {
+        "portability(m3)": "undefined",
+        "name": "Aradosee"
+    },
+    "Q104215543": {
+        "portability(m3)": "undefined",
+        "name": "Köppchensee"
+    },
+    "Q1813310": {
+        "portability(m3)": "undefined",
+        "name": "Lehnssee"
+    },
+    "Q881610": {
+        "portability(m3)": "undefined",
+        "name": "Blankensee"
+    },
+    "Q18026158": {
+        "portability(m3)": "undefined",
+        "name": "Mittelprendener See"
+    },
+    "Q16055818": {
+        "portability(m3)": "undefined",
+        "name": "Dewinsee"
+    },
+    "Q2355300": {
+        "portability(m3)": "undefined",
+        "name": "Streesee"
+    },
+    "Q15111868": {
+        "portability(m3)": "undefined",
+        "name": "Großer Spektesee"
+    },
+    "Q95147113": {
+        "portability(m3)": 55635,
+        "name": "Neuer See"
+    },
+    "Q32061522": {
+        "portability(m3)": "undefined",
+        "name": "Ihlandsee"
+    },
+    "Q1495280": {
+        "portability(m3)": "undefined",
+        "name": "Mechesee"
+    },
+    "Q32740959": {
+        "portability(m3)": "undefined",
+        "name": "Siethener See"
+    },
+    "Q318313": {
+        "portability(m3)": "undefined",
+        "name": "Schwielowsee"
+    },
+    "Q32663698": {
+        "portability(m3)": "undefined",
+        "name": "Mühlenbecker See"
+    },
+    "Q60043068": {
+        "portability(m3)": "undefined",
+        "name": "Tonsee"
+    },
+    "Q32498339": {
+        "portability(m3)": "undefined",
+        "name": "Förstersee"
+    },
+    "Q1451863": {
+        "portability(m3)": "undefined",
+        "name": "Frauensee"
+    },
+    "Q32297104": {
+        "portability(m3)": "undefined",
+        "name": "Seechen"
+    },
+    "Q17493317": {
+        "portability(m3)": "undefined",
+        "name": "Kleiner Stienitzsee"
+    },
+    "Q114035": {
+        "portability(m3)": "undefined",
+        "name": "Regenbogensee"
+    },
+    "Q2264690": {
+        "portability(m3)": "undefined",
+        "name": "Seechen"
+    },
+    "Q32750920": {
+        "portability(m3)": 72562,
+        "name": "Teufelssee"
+    },
+    "Q104695907": {
+        "portability(m3)": "undefined",
+        "name": "Küchensee"
+    },
+    "Q102363418": {
+        "portability(m3)": "undefined",
+        "name": "Briesesee"
+    },
+    "Q32254332": {
+        "portability(m3)": "undefined",
+        "name": "Retsee"
+    },
+    "Q14947316": {
+        "portability(m3)": "undefined",
+        "name": "Beetzer See"
+    },
+    "Q184416": {
+        "portability(m3)": "undefined",
+        "name": "Zeesener See"
+    },
+    "Q1355282": {
+        "portability(m3)": "undefined",
+        "name": "Wolziger See"
+    },
+    "Q1456693": {
+        "portability(m3)": "undefined",
+        "name": "Kutzingsee"
+    },
+    "Q1805171": {
+        "portability(m3)": 2146991,
+        "name": "Langer See (2)"
+    },
+    "Q1722387": {
+        "portability(m3)": "undefined",
+        "name": "Kalksee"
+    },
+    "Q32122943": {
+        "portability(m3)": "undefined",
+        "name": "Markgrafensee"
+    },
+    "Q199258": {
+        "portability(m3)": "undefined",
+        "name": "Ziestsee"
+    },
+    "Q31920103": {
+        "portability(m3)": "undefined",
+        "name": "Brandsee"
+    },
+    "Q1570634": {
+        "portability(m3)": "undefined",
+        "name": "Motzener See"
+    },
+    "Q31905589": {
+        "portability(m3)": "undefined",
+        "name": "Barssee"
+    },
+    "Q32068384": {
+        "portability(m3)": "undefined",
+        "name": "Krummer See"
+    },
+    "Q25392870": {
+        "portability(m3)": "undefined",
+        "name": "Gamensee"
+    },
+    "Q17123698": {
+        "portability(m3)": 8719843,
+        "name": "Hölzerner See"
+    },
+    "Q464562": {
+        "portability(m3)": 19300000,
+        "name": "Sacrower See"
+    },
+    "Q32064887": {
+        "portability(m3)": "undefined",
+        "name": "Kiebitzsee"
+    },
+    "Q32728771": {
+        "portability(m3)": "undefined",
+        "name": "Schmöldesee"
+    },
+    "Q1595306": {
+        "portability(m3)": "undefined",
+        "name": "Heiliger See"
+    },
+    "Q2130994": {
+        "portability(m3)": "undefined",
+        "name": "Rangsdorfer See"
+    },
+    "Q655452": {
+        "portability(m3)": "undefined",
+        "name": "Wuhlebecken"
+    },
+    "Q31915795": {
+        "portability(m3)": "undefined",
+        "name": "Blakesee"
+    },
+    "Q2557099": {
+        "portability(m3)": 360606,
+        "name": "Weißer See"
+    },
+    "Q1426847": {
+        "portability(m3)": "undefined",
+        "name": "Flakensee"
+    },
+    "Q896125": {
+        "portability(m3)": 1074042,
+        "name": "Griebnitzsee"
+    },
+    "Q115756993": {
+        "portability(m3)": "undefined",
+        "name": "Ententeich"
+    },
+    "Q32087037": {
+        "portability(m3)": 10006876,
+        "name": "Langer See (1)"
+    },
+    "Q25393270": {
+        "portability(m3)": "undefined",
+        "name": "Blauer See"
+    },
+    "Q1400311": {
+        "portability(m3)": "undefined",
+        "name": "Kleiner Wukensee"
+    },
+    "Q31924726": {
+        "portability(m3)": "undefined",
+        "name": "Bukowsee"
+    },
+    "Q32579887": {
+        "portability(m3)": "undefined",
+        "name": "Kleiner Müggelsee"
+    },
+    "Q1991313": {
+        "portability(m3)": 58192,
+        "name": "Nikolassee"
+    },
+    "Q26271493": {
+        "portability(m3)": 798635,
+        "name": "Elsensee"
+    },
+    "Q107400876": {
+        "portability(m3)": "undefined",
+        "name": "Güterfelder Haussee"
+    },
+    "Q694789": {
+        "portability(m3)": 35000000,
+        "name": "Großer Müggelsee"
+    },
+    "Q1252898": {
+        "portability(m3)": "undefined",
+        "name": "Göttinsee"
+    },
+    "Q1633640": {
+        "portability(m3)": 42143,
+        "name": "Hubertussee"
+    },
+    "Q32065012": {
+        "portability(m3)": "undefined",
+        "name": "Kindelsee"
+    },
+    "Q115756975": {
+        "portability(m3)": 4754,
+        "name": "Inselteich"
+    },
+    "Q1447259": {
+        "portability(m3)": "undefined",
+        "name": "Lehnitzsee"
+    },
+    "Q2354065": {
+        "portability(m3)": "undefined",
+        "name": "Straussee"
+    }
+}
