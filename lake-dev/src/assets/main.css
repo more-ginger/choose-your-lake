@@ -123,10 +123,6 @@ a,
     margin: 0 auto;
   }
 
-  #canvas {
-    pointer-events: none;
-  }
-
   .top-menu>ul {
     height: 100%;
     list-style-type: none;
