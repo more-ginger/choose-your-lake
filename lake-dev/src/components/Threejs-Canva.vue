@@ -1,6 +1,10 @@
 <script>
 import * as THREE from 'three'
+import * as d3geo from 'd3-geo'
 import Lakes from '@/assets/data/berlin-bb-lakes.json'
+
+// Define scale based on mix and max volume, 
+// with max being daily consumption
 
 export default {
     props: {
@@ -45,8 +49,8 @@ export default {
         this.$refs.canvas.appendChild(this.renderer.domElement)
     }, 
     methods: {
-        init(path) {
-            console.log(path)
+        init(lakePath) {
+            // console.log(lakePath)
             //scene
             this.scene = new THREE.Scene()
             //camera
@@ -66,34 +70,33 @@ export default {
             this.light.position.set(0, 5, 10)
             this.camera.position.z = 5
 
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0x00d4ff,
+                metalness: 0,
+                roughness: 0.7,
+                transmission: 0.5,
+                thickness: 0.5
+            })
+
             console.log("initiation done");
 
             //decide which shape should be added
-            if (path) {
+            if (lakePath) {
                 this.camera.position.z = 1
-                this.buildShape(path)
+                this.buildShape(lakePath, material)
             } else {
                 console.log('default to cube')
-                this.geometry = new THREE.BoxGeometry(2, 4, 2)
-
-                const material = new THREE.MeshPhysicalMaterial({
-                    color: 0x00d4ff,
-                    metalness: 0,
-                    roughness: 0.7,
-                    transmission: 0.5,
-                    thickness: 0.5
-                 })
-            
+                this.geometry = new THREE.BoxGeometry(2, 4, 2)       
                 this.cube = new THREE.Mesh(this.geometry, material)
                 this.scene.add(this.cube)
             }
         },
-        animate: function(path) {
+        animate: function(lakePath) {
             requestAnimationFrame(this.animate)
             this.renderer.render(this.scene, this.camera)
-            // console.log(path)
+            // console.log(lakePath)
             if (this.context !== 'mounted') {
-                this.lakeShape.rotation.y += 0.005
+                this.lakeShape.rotation.z += 0.005
             } else {
                 this.cube.rotation.y += 0.005
             }
@@ -102,7 +105,7 @@ export default {
         addShape(shape) {
             const extrudeSettings = {
                 steps: 1,
-                depth: 1.1,
+                depth: 0.5,
                 bevelEnabled: true,
                 bevelThickness: 0,
                 bevelSize: 0,
@@ -112,66 +115,77 @@ export default {
 
             //Create the geometry
             var lakeGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-            let material = new THREE.MeshPhongMaterial({ color: 0x0231bd, wireframe: false });
+            // let material = new THREE.MeshPhongMaterial({ color: 0x0231bd, wireframe: false });
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0x00d4ff,
+                metalness: 0,
+                roughness: 0.7,
+                transmission: 0.5,
+                thickness: 0.1
+            })
 
             const lakeShape = new THREE.Mesh(lakeGeometry, material);
             this.lakeShape = lakeShape
             this.lakeShape.castShadow = true;
             this.lakeShape.name = 'lake';
+            this.lakeShape.rotation.x = 2
+
             this.scene.add(this.lakeShape)
         },
         translateLat(lat, firstLat) {
             if (!lat) {
             lat = 0;
           }
-          return (lat - firstLat) * 100;
+
+          return (lat - Math.abs(firstLat)) * 100;
         },
         translateLng(lng, firstLng) {
             if (!lng) {
             lng = 0;
           }
-          return (lng - firstLng) * 100;
+          return (lng - Math.abs(firstLng)) * 100;
         },
-        buildShape(path) {
-            console.log(path.geometry)
+        buildShape(lakePath, material) {
+            // console.log(lakePath.geometry)
             let good = true;
             const points = [];
 
+            const lakeCentroid = d3geo.geoPath().centroid(lakePath.geometry)
+            
             if (
-                path.geometry.coordinates.length < 1 ||
-                path.geometry.coordinates[0] < 1
+                lakePath.geometry.coordinates.length < 1 ||
+                lakePath.geometry.coordinates[0] < 1
             ) {
                 good = false
             } else {
-                for (let i = 0; i < path.geometry.coordinates[0].length; i++) {
+                for (let i = 0; i < lakePath.geometry.coordinates[0].length; i++) {
                     if (
-                            path.geometry.coordinates[0][i][0] &&
-                            path.geometry.coordinates[0][i][1] &&
-                            path.geometry.coordinates[0][i][0] > 0 &&
-                            path.geometry.coordinates[0][i][1] > 0
+                            lakePath.geometry.coordinates[0][i][0] &&
+                            lakePath.geometry.coordinates[0][i][1] &&
+                            lakePath.geometry.coordinates[0][i][0] > 0 &&
+                            lakePath.geometry.coordinates[0][i][1] > 0
                     ) {
                         points.push(
                             new THREE.Vector2(
-                                this.translateLat(path.geometry.coordinates[0][i][0], path.geometry.coordinates[0][0][0]),
-                                this.translateLng(path.geometry.coordinates[0][i][1], path.geometry.coordinates[0][0][1])
+                                this.translateLat(lakePath.geometry.coordinates[0][i][0], lakeCentroid[0]),
+                                this.translateLng(lakePath.geometry.coordinates[0][i][1], lakeCentroid[1])
                             )
                         )
                     } else {
                         good = false
                     }
                 }
-                // console.log(good)
             }
 
             if (good) {
-                this.addShape(new THREE.Shape(points));
+                this.addShape(new THREE.Shape(points), material);
             }
         }
     },
     watch: {
         selectedLake(newVal, oldVal) {
             this.currentLake = newVal.name
-            console.log(this.currentLake, this.lakeFeature)
+            // console.log(this.currentLake, this.lakeFeature)
         }
     }
 }

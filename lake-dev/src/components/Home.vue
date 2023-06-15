@@ -2,15 +2,29 @@
 import Dropdown from 'primevue/dropdown';
 import ThreejsCanva from './Threejs-Canva.vue'
 import { ref } from "vue";
-// import AllLakes from 
+import lakesID from '@/assets/data/lakes-water-volume.json' 
 
 const selectedLake = ref();
 
-const allLakes = ref([
-    { name: 'Hubertussee', code: 'Q1616489' },
-    { name: 'Schäfersee', code: 'Q2258294' },
-    { name: 'Plötzensee', code: 'Q541313' }
-]);
+const lakesArray = [];
+
+const lakesKeys = Object.keys(lakesID)
+
+
+// must filter away the ones with no volume data
+const lakes = lakesKeys.forEach(id => {
+  const currentLake = lakesID[id]
+  lakesArray.push({
+    "name":currentLake.name,
+    "id": id,
+    "volume": currentLake['portability(m3)']
+  })
+})
+
+const allLakes = ref(lakesArray)
+console.log(allLakes)
+
+
 
 export default {
   components: {
@@ -48,7 +62,7 @@ export default {
           <h1>00Mln M3 is the daily water consumption of Berliners.</h1>
         </div>
         <div class="inner-title" v-else>
-          <h1>{{ selectedLake.name }}</h1>
+          <h1>Which is 2 times as much as {{ selectedLake.name }}</h1>
         </div>
       </div>
       <div class="canvas-container">
