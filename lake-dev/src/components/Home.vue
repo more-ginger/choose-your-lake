@@ -11,14 +11,15 @@ const lakesArray = [];
 const lakesKeys = Object.keys(lakesID)
 
 
-// must filter away the ones with no volume data
 const lakes = lakesKeys.forEach(id => {
   const currentLake = lakesID[id]
-  lakesArray.push({
+  if (lakesID[id]['portability(m3)'] !== "undefined") {
+      lakesArray.push({
     "name":currentLake.name,
     "id": id,
     "volume": currentLake['portability(m3)']
   })
+  }
 })
 
 const allLakes = ref(lakesArray)
@@ -37,7 +38,9 @@ export default {
       selectedLake,
       canvasWidth: 0,
       canvasHeight: 0,
-      mounted: false
+      mounted: false,
+      dailyWaterConsumption: 578849.3,
+      currentConsumption: 0
     }
   },
   mounted () {
@@ -48,8 +51,12 @@ export default {
     getContainerSizes(){
       this.canvasWidth = this.$refs['canvas-inner'].clientWidth
       this.canvasHeight = this.$refs['canvas-inner'].clientHeight
-    }
+    },
+      updateConsumption(value) {
+    this.currentConsumption = value
   }
+  },
+
 }
 
 </script>
@@ -59,10 +66,12 @@ export default {
     <div class="graphic container-inner">
       <div class="title">
         <div class="inner-title" v-if="selectedLake === undefined">
-          <h1>00Mln M3 is the daily water consumption of Berliners.</h1>
+          <h1>{{dailyWaterConsumption}} Mln m<span class="super">3</span> is the daily water consumption of Berliners.</h1>
         </div>
         <div class="inner-title" v-else>
-          <h1>Which is 2 times as much as {{ selectedLake.name }}</h1>
+          <h1>
+            Which is {{ currentConsumption }} times as much as {{ selectedLake.name }}
+          </h1>
         </div>
       </div>
       <div class="canvas-container">
@@ -72,6 +81,8 @@ export default {
             :canvasWidth=canvasWidth 
             :canvasHeight=canvasHeight
             :selectedLake=selectedLake
+            :dailyWaterConsumption=dailyWaterConsumption
+            @onChangeConsumption="updateConsumption"
           />
         </div>
       </div>
