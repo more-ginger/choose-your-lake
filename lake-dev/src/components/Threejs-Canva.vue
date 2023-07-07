@@ -4,6 +4,8 @@ import * as d3geo from 'd3-geo'
 import * as scale from 'd3-scale'
 import Lakes from '@/assets/data/berlin-bb-lakes.json'
 
+
+
 export default {
     // emits: ['update:changeConsumption'],
     props: {
@@ -68,132 +70,127 @@ export default {
         this.$refs.canvas.appendChild(this.renderer.domElement)
     }, 
     methods: {
+
         init(lakePath) {
             
             this.scene = new THREE.Scene()
+            
             //camera
-            this.camera = new THREE.PerspectiveCamera(
-                75,
-                window.innerWidth / window.innerHeight,
-                0.1,
-            )
+            this.camera = new THREE.PerspectiveCamera(75,this.canvasWidth / this.canvasHeight,0.1)
+            this.camera.position.z = 12
+            this.camera.rotation.x = -Math.PI/6
+            this.camera.position.y = 7.5
             
             //rendered
             this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha:true })
-            this.light = new THREE.DirectionalLight(0xFFFBE6, 0.8)
+           
+            this.light =  new THREE.AmbientLight( 0xffffff );
 
-            // const sphereSize = 1;
-            // const lightHelper = new THREE.DirectionalLightHelper(this.light, sphereSize);
-            // // add the point light helper to the scene
-            // this.scene.add(lightHelper);
+            this.grid = new THREE.GridHelper(25, 10,  0x82C3FF, 0x3E9AEF );
+            this.grid.geometry.rotateY( -Math.PI / 2 );
+            this.grid.position.y = -4
+            this.scene.fog = new THREE.Fog(0xffffff,10, 25);
+            this.scene.add( this.grid );
 
             //scene
             this.scene.add(this.camera)
             this.scene.add(this.light)
             this.renderer.setSize(this.canvasWidth, this.canvasHeight)
-            this.light.position.set(-1, 2, 5)
-            this.light.rotation.z = Math.PI / 4
-            this.camera.position.z = 10 
-            // this.camera.position.y = 1
 
-            const material = new THREE.MeshPhysicalMaterial({
-                color: 0x00d4ff,
-                metalness: 0,
-                roughness: 0.7,
-                transmission: 0.5,
-                thickness: 0.5
-            })
+            const materials = [
+                new THREE.MeshToonMaterial({
+                color: 0x82C3FF,
+                transparent: true,
+                opacity: 0.5,
+                side: THREE.DoubleSide
+                }),
+                new THREE.MeshToonMaterial({
+                color: 0x82C3FF,
+                transparent: true,
+                opacity: 0.8,
+                side: THREE.DoubleSide
+                }),
+                new THREE.MeshToonMaterial({
+                color: 0x82C3FF,
+                transparent: true,
+                opacity: 0.5,
+                side: THREE.DoubleSide
+                })
+            ]
 
             console.log("initiation done");
 
             //decide which shape should be added
             if (lakePath) {  
-                console.log(this.consumptionScale)      
-                this.camera.position.z = 1.5
-                this.buildShape(lakePath, material)
+                console.log('render lake')
+                this.grid.position.y = 0
+                this.camera.position.z = 5
+                this.camera.position.y = 6
+                this.buildLakeShape(lakePath, materials)
             } else {
                 console.log('default to cube')
-                this.geometry = new THREE.BoxGeometry(2, 4, 2)       
-                this.cube = new THREE.Mesh(this.geometry, material)
-                this.scene.add(this.cube)
+                this.buildDefaultGlass(materials)
             }
         },
         animate: function(lakePath) {
             requestAnimationFrame(this.animate)
             this.renderer.render(this.scene, this.camera)
             // console.log(lakePath)
+            this.grid.rotation.y += 0.005
             if (this.context !== 'mounted') {
-                this.lakeShape.rotation.z += 0.005
-                this.defaultLakeShape.rotation.z += 0.005
+                this.group.rotation.y += 0.005
             } else {
-                this.cube.rotation.y += 0.005
+                this.defaultGlassGroup.rotation.y += 0.005
             }
             
         },
-        addShape(shape) {
-            const depth = this.consumptionScale(this.currentLakeVolume)
-            
-            const defaultExtrudeSettings = {
-                depth: 1,
-                bevelThickness: 0,
-                bevelSize: 0,
-                bevelOffset: 0,
-                bevelSegments: 0,
+        addShape(shape, materials) {
+            const numOfIterations = this.dailyWaterConsumption / this.currentLakeVolume
+            console.log('current volume', this.currentLakeVolume)
+            console.log('iterations', Math.round(numOfIterations))
+
+            const domain = [0, numOfIterations]
+            const range = [0, 1]
+            const consumptionScale = scale.scaleLinear().domain(domain).range(range)
+
+            this.group = new THREE.Group();
+            let positionY = 0
+            for (let index = 0; index < numOfIterations; index++) {
+                
+                // const element = array[index];
+                // console.log(5 / numOfIterations)
+                const depth = (5 / numOfIterations)
+                const scaledDepth = consumptionScale(depth) * 10
+                console.log('scaled depth', scaledDepth)
+                // console.log(depth)
+                positionY = positionY + depth
+                const extrudeSettings = {
+                    depth: scaledDepth,
+                    bevelThickness: 0,
+                    bevelSize: 0,
+                    bevelOffset: 0,
+                    bevelSegments: 0
+                }
+
+                const lakeGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+                const lakeShape = new THREE.Mesh(lakeGeometry, materials);
+                lakeShape.scale.set(5, 5, 1)
+                lakeShape.rotation.x = -Math.PI / 2;
+                lakeShape.position.y =positionY
+                this.group.add(lakeShape);
             }
 
-            const extrudeSettings = {
-                depth,
-                bevelThickness: 0,
-                bevelSize: 0,
-                bevelOffset: 0,
-                bevelSegments: 0,
-            };
-
             //Create the geometry
-            var lakeGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-            var totalConsumptionGeometry = new THREE.ExtrudeGeometry(shape, defaultExtrudeSettings);
-            // let material = new THREE.MeshPhongMaterial({ color: 0x0231bd, wireframe: false });
+    
 
-            const defaultMaterial = new THREE.MeshPhysicalMaterial({
-                color: 0xFFFFFF,
-                metalness: 0,
-                roughness: 0,
-                transmission: 0.9,
-                thickness: 1,
-                transparent: true,
-                opacity: 0.8
-            })
-
-            const material = new THREE.MeshPhysicalMaterial({
-                color: 0x00d4ff,
-                metalness: 0,
-                roughness: 0.7,
-                transmission: 0.5,
-                thickness: 0.1,
-                polygonOffset: true,
-                polygonOffsetFactor: -0.2
-            })
-
-            const lakeShape = new THREE.Mesh(lakeGeometry, material);
-            this.lakeShape = lakeShape
-            this.lakeShape.castShadow = true;
-            this.lakeShape.name = 'lake';
-            this.lakeShape.rotation.x = -Math.PI / 2;
-
-            const defaultLakeShape = new THREE.Mesh(totalConsumptionGeometry, defaultMaterial);
-            this.defaultLakeShape = defaultLakeShape
-            this.defaultLakeShape.castShadow = true;
-            this.defaultLakeShape.name = 'lake';
-            this.defaultLakeShape.scale.set(1.01, 1.01, 1.01);
-            this.defaultLakeShape.rotation.x = -Math.PI / 2;
-            this.defaultLakeShape.renderOrder=1
-
-            const group = new THREE.Group();
-            group.position.y = -0.5;
-            group.add( this.defaultLakeShape );
-            group.add( this.lakeShape );
-
-            this.scene.add(group);
+            // const lakeShape = new THREE.Mesh(lakeGeometry, materials);
+            // this.lakeShape = lakeShape
+            // this.lakeShape.castShadow = true;
+            // this.lakeShape.name = 'lake';
+            // this.lakeShape.scale.set(5, 5, 1)
+            // this.lakeShape.rotation.x = -Math.PI / 2;
+            
+            this.scene.add(this.group);
         },
         translateLat(lat, firstLat) {
             if (!lat) {
@@ -208,7 +205,7 @@ export default {
           }
           return (lng - Math.abs(firstLng)) * 100;
         },
-        buildShape(lakePath, material) {
+        buildLakeShape(lakePath, materials) {
             // console.log(lakePath.geometry)
             let good = true;
             const points = [];
@@ -241,11 +238,22 @@ export default {
             }
 
             if (good) {
-                this.addShape(new THREE.Shape(points), material);
+                this.addShape(new THREE.Shape(points), materials);
             }
-        }
+        },
+        buildDefaultGlass(materials) {
+            // builds default glass geometry
+            const innerCylinder = new THREE.CylinderGeometry(2.8, 2.8, 9, 64) 
+            this.water = new THREE.Mesh(innerCylinder, materials) 
+            this.defaultGlassGroup = new THREE.Group()
+            this.defaultGlassGroup.add(this.water)
+            // this.defaultGlassGroup.position.y = 2
+            this.scene.add(this.defaultGlassGroup)
+        },
+
     },
     watch: {
+        // changes current lake to display new glass
         selectedLake(newVal, oldVal) {
             this.currentLake = newVal.name
             this.currentLakeID = newVal.id

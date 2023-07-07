@@ -6,6 +6,15 @@ body {
   height: 100vh;
 }
 
+header {
+  border-bottom: 1px solid black;
+
+}
+
+footer {
+  border-top: 1px solid black;
+}
+
 #app {
   width: 100vw;
   height: 100vh;
@@ -86,8 +95,8 @@ a,
   }
 
   .title>.inner-title {
-    margin: 0 auto;
-    width: 90%;
+    margin: 10% auto;
+    width: 85%;
     text-align: left;
     /* padding: 1rem; */
   }
@@ -99,6 +108,7 @@ a,
 
   .inner-title>h1>span {
     vertical-align: super;
+    font-size: 25px;
   }
 
   .graphic>.canvas-container {

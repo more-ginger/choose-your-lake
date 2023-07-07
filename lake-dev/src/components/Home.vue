@@ -66,11 +66,11 @@ export default {
     <div class="graphic container-inner">
       <div class="title">
         <div class="inner-title" v-if="selectedLake === undefined">
-          <h1>{{dailyWaterConsumption}} Mln m<span class="super">3</span> is the daily water consumption of Berliners.</h1>
+          <h1>{{dailyWaterConsumption}} Mln m<span class="super">3</span> is the water consumed daily by Berliners.</h1>
         </div>
         <div class="inner-title" v-else>
           <h1>
-            Which is {{ currentConsumption }} times as much as {{ selectedLake.name }}
+            It would take {{ currentConsumption }} times the volume of {{ selectedLake.name }} to fulfil it.
           </h1>
         </div>
       </div>
