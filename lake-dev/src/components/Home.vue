@@ -4,12 +4,11 @@ import ThreejsCanva from './Threejs-Canva.vue'
 import { ref } from "vue";
 import lakesID from '@/assets/data/lakes-water-volume.json' 
 
+// const eventHub = new Vue();
+
 const selectedLake = ref();
-
 const lakesArray = [];
-
 const lakesKeys = Object.keys(lakesID)
-
 
 const lakes = lakesKeys.forEach(id => {
   const currentLake = lakesID[id]
@@ -22,12 +21,13 @@ const lakes = lakesKeys.forEach(id => {
   }
 })
 
-const allLakes = ref(lakesArray)
-console.log(allLakes)
-
-
+const sortedLakesArray = lakesArray.sort((a, b) => a.name.localeCompare(b.name))
+const allLakes = ref(sortedLakesArray)
 
 export default {
+  props: {
+    footerActive: Boolean
+  },
   components: {
     Dropdown,
     ThreejsCanva
@@ -40,7 +40,8 @@ export default {
       canvasHeight: 0,
       mounted: false,
       dailyWaterConsumption: 578849.3,
-      currentConsumption: 0
+      currentConsumption: 0,
+      isBlurred: false
     }
   },
   mounted () {
@@ -52,9 +53,9 @@ export default {
       this.canvasWidth = this.$refs['canvas-inner'].clientWidth
       this.canvasHeight = this.$refs['canvas-inner'].clientHeight
     },
-      updateConsumption(value) {
-    this.currentConsumption = value
-  }
+    updateConsumption(value) {
+      this.currentConsumption = value
+    }
   },
 
 }
@@ -62,15 +63,15 @@ export default {
 </script>
 
 <template>
-  <div class="home container">
+  <div class="home container" :class="{'blurred-container': footerActive}">
     <div class="graphic container-inner">
       <div class="title">
-        <div class="inner-title" v-if="selectedLake === undefined">
+        <div class="inner-title" v-if="selectedLake === undefined || selectedLake === null">
           <h1>{{dailyWaterConsumption}} Mln m<span class="super">3</span> is the water consumed daily by Berliners.</h1>
         </div>
         <div class="inner-title" v-else>
           <h1>
-            It would take {{ currentConsumption }} times the volume of {{ selectedLake.name }} to fulfil it.
+            It would take {{ currentConsumption }} times a day the volume of {{ selectedLake.name }} to fulfil it.
           </h1>
         </div>
       </div>
@@ -80,7 +81,7 @@ export default {
             v-if="mounted === true"
             :canvasWidth=canvasWidth 
             :canvasHeight=canvasHeight
-            :selectedLake=selectedLake
+            :selectedLake="selectedLake === null ? undefined : selectedLake"
             :dailyWaterConsumption=dailyWaterConsumption
             @onChangeConsumption="updateConsumption"
           />
@@ -93,9 +94,9 @@ export default {
           v-model="selectedLake" 
           :options="allLakes" 
           optionLabel="name" 
-          editable
           placeholder="Select a Lake" 
           class="w-full md:w-14rem" 
+          showClear
         />
       </div>
     </div>

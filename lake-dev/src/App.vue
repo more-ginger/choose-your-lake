@@ -10,18 +10,27 @@ export default {
     TopBar,
     BottomBar,
   },
+  data () {
+    return {
+      footerActive: false
+    }
+  },
+  methods: {
+    updateClass(value) {
+      // console.log(value)
+      this.footerActive = value
+    }
+  }
 };
 </script>
 
 <template>
   <main>
-    <header>
+    <header >
       <top-bar />
     </header>
-    <home />
-    <footer>
-      <bottom-bar />
-    </footer>
+    <Home :footerActive="footerActive"/>
+    <bottom-bar @onFooterChange="updateClass"/>
   </main>
 </template>
 

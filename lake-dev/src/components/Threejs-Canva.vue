@@ -41,17 +41,7 @@ export default {
             const {dailyWaterConsumption, currentLakeVolume} = this
             // console.log()
             const currentConsumption = dailyWaterConsumption /  currentLakeVolume
-            const currentConsumptionPretty = currentConsumption.toFixed(1)
-            this.$emit('onChangeConsumption', currentConsumptionPretty)
             return currentConsumption
-        },
-        consumptionScale () {
-            const domain = [0, this.dailyWaterConsumption]
-            const range = [0, 1]
-            const consumptionScale = scale.scaleLinear().domain(domain).range(range)
-            // Define scale based on mix and max volume, 
-            // with max being daily consumption
-            return consumptionScale
         }
     },
     mounted() {
@@ -113,7 +103,7 @@ export default {
                 new THREE.MeshToonMaterial({
                 color: 0x82C3FF,
                 transparent: true,
-                opacity: 0.5,
+                opacity: 0.7,
                 side: THREE.DoubleSide
                 })
             ]
@@ -122,13 +112,19 @@ export default {
 
             //decide which shape should be added
             if (lakePath) {  
-                console.log('render lake')
-                this.grid.position.y = 0
-                this.camera.position.z = 5
-                this.camera.position.y = 6
-                this.buildLakeShape(lakePath, materials)
+                if (Object.hasOwn(lakePath, 'type')) {
+                    console.log('render lake')
+                    // this.grid.position.y = 0
+                    this.camera.position.z = 10
+                    this.camera.position.y = 8
+                    this.buildLakeShape(lakePath, materials)
+                } else {
+                    console.log('render cube')
+                    this.buildDefaultGlass(materials)
+                }
+                
             } else {
-                console.log('default to cube')
+                console.log('render cube')
                 this.buildDefaultGlass(materials)
             }
         },
@@ -146,26 +142,40 @@ export default {
         },
         addShape(shape, materials) {
             const numOfIterations = this.dailyWaterConsumption / this.currentLakeVolume
-            console.log('current volume', this.currentLakeVolume)
-            console.log('iterations', Math.round(numOfIterations))
+            // console.log('current volume', this.currentLakeVolume)
+            // console.log('iterations', Math.round(numOfIterations))
+           
+            let numOfGaps = Math.floor(numOfIterations);
+            let checkedNumOfIterations = numOfIterations;
 
-            const domain = [0, numOfIterations]
-            const range = [0, 1]
-            const consumptionScale = scale.scaleLinear().domain(domain).range(range)
+            // check if faktor has decimals
+            const decimal = numOfIterations%1
+            if (decimal===0) numOfGaps -= 1;
+
+            // if less then 1 assign 1 (so it has full height)
+            if (numOfIterations<1) checkedNumOfIterations = 1
+      
+            const totalHeight = 10
+            const gapHeight = Math.max(totalHeight/(checkedNumOfIterations*10), 0.05)
+            const lakeHeight = (totalHeight-(gapHeight*numOfGaps))/checkedNumOfIterations
 
             this.group = new THREE.Group();
             let positionY = 0
             for (let index = 0; index < numOfIterations; index++) {
+                // console.log('!')
+                let depth = Math.abs(lakeHeight)
+
+                // check if more than 1 lake needed and at last lake
+                if(numOfIterations>1 && numOfIterations - index < 1){
+                    // adjust lakeHeight to decimal
+                    depth = Math.abs(lakeHeight * decimal) 
+                }
                 
-                // const element = array[index];
-                // console.log(5 / numOfIterations)
-                const depth = (5 / numOfIterations)
-                const scaledDepth = consumptionScale(depth) * 10
-                console.log('scaled depth', scaledDepth)
-                // console.log(depth)
-                positionY = positionY + depth
+                // add height if not first lake
+                if(index > 0) positionY = positionY + lakeHeight + gapHeight
+                
                 const extrudeSettings = {
-                    depth: scaledDepth,
+                    depth,
                     bevelThickness: 0,
                     bevelSize: 0,
                     bevelOffset: 0,
@@ -173,23 +183,15 @@ export default {
                 }
 
                 const lakeGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+                lakeGeometry.groups[0].materialIndex = 2
+                lakeGeometry.groups[1].materialIndex = 1
                 const lakeShape = new THREE.Mesh(lakeGeometry, materials);
-                lakeShape.scale.set(5, 5, 1)
+                lakeShape.scale.set(6, 6, 1)
                 lakeShape.rotation.x = -Math.PI / 2;
-                lakeShape.position.y =positionY
+                lakeShape.position.y = positionY
                 this.group.add(lakeShape);
             }
-
-            //Create the geometry
-    
-
-            // const lakeShape = new THREE.Mesh(lakeGeometry, materials);
-            // this.lakeShape = lakeShape
-            // this.lakeShape.castShadow = true;
-            // this.lakeShape.name = 'lake';
-            // this.lakeShape.scale.set(5, 5, 1)
-            // this.lakeShape.rotation.x = -Math.PI / 2;
-            
+            this.group.position.y = -4
             this.scene.add(this.group);
         },
         translateLat(lat, firstLat) {
@@ -243,7 +245,7 @@ export default {
         },
         buildDefaultGlass(materials) {
             // builds default glass geometry
-            const innerCylinder = new THREE.CylinderGeometry(2.8, 2.8, 9, 64) 
+            const innerCylinder = new THREE.CylinderGeometry(2.4, 2.4, 10, 64) 
             this.water = new THREE.Mesh(innerCylinder, materials) 
             this.defaultGlassGroup = new THREE.Group()
             this.defaultGlassGroup.add(this.water)
@@ -255,10 +257,14 @@ export default {
     watch: {
         // changes current lake to display new glass
         selectedLake(newVal, oldVal) {
-            this.currentLake = newVal.name
-            this.currentLakeID = newVal.id
-            this.currentLakeVolume = newVal.volume === undefined ? 0 : newVal.volume
-            console.log(this.waterConsumption)
+            this.currentLake = newVal === undefined ? '' : newVal.name
+            this.currentLakeID = newVal === undefined ? '' : newVal.id
+            this.currentLakeVolume = newVal === undefined 
+                || newVal.volume === undefined ? 0 : newVal.volume
+
+            const waterConsumptionPretty = this.waterConsumption.toFixed(1)
+            this.$emit('onChangeConsumption', waterConsumptionPretty)
+            // console.log(newVal)
         }
     }
 }
