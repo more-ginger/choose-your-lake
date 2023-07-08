@@ -20,9 +20,11 @@ footer {
   height: 5%;
   border-top: 1px solid black;
   background-color: rgba(255, 255, 255, 0.9);
+  transition: height 0.5s ease;
 }
 
 footer.opened-footer {
+  transition: height 0.5s ease;
   height: 95%;
   border-top: none;
   z-index: 10;
@@ -36,9 +38,9 @@ footer>.container>.inner-container {
   width: 90%;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
-  flex-direction: column;
 }
 
 footer.opened-footer>.container>.inner-container {
@@ -50,7 +52,7 @@ footer.opened-footer>.container>.inner-container {
 #app {
   width: 100vw;
   height: 100vh;
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   text-align: center;
 
@@ -112,118 +114,137 @@ a,
   }
 }
 
-@media (max-width: 600px) {
 
-  main {
-    height: 100%;
+
+.title>.inner-title {
+  margin: 10% auto;
+  width: 85%;
+  text-align: left;
+  /* padding: 1rem; */
+}
+
+.inner-title>h1 {
+  font-size: 40px;
+  font-family: var(--p-type);
+}
+
+.inner-title>h1>span {
+  vertical-align: super;
+  font-size: 25px;
+}
+
+.graphic>.canvas-container {
+  position: absolute;
+  width: 100%;
+  height: 95%;
+  top: 0;
+  z-index: 0;
+}
+
+.home>.searchbar {
+  height: 10%;
+  position: absolute;
+  width: 100%;
+  bottom: 5%;
+  z-index: 2;
+}
+
+.searchbar>.search-bar {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  height: 5%;
+}
+
+header>.container,
+.container>.inner-container,
+.top-menu {
+  height: 100%;
+}
+
+.canvas-container>.canvas-inner-container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.top-menu>ul {
+  height: 100%;
+  list-style-type: none;
+  text-align: left;
+  font-family: var(--h1-type);
+  padding-left: 1rem;
+}
+
+.top-menu>ul>li {
+  display: inline-block;
+  line-height: 220%;
+  width: 100%;
+  height: 100%;
+  background: url('@/assets/img/wave.svg') no-repeat;
+  background-position: left center;
+  background-size: 60px;
+  padding-left: 70px;
+  font-size: 18px;
+}
+
+.home {
+  height: 95%;
+  filter: blur(0px);
+  transition: filter 0.2s;
+}
+
+main {
+  height: 100%;
+}
+
+.home>.graphic {
+  height: 100%;
+  position: relative;
+}
+
+.home.blurred-container {
+  filter: blur(2px);
+  transition: filter 0.5s 0.2s;
+}
+
+.graphic>.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width:600px) {
+
+  .home>.container-inner>.title>.inner-title>h1 {
+    font-size: 60px;
   }
 
-  .home {
-    height: 95%;
+  .p-dropdown-label,
+  .p-dropdown-items {
+    font-size: 24px;
   }
 
-  .home>.graphic {
-    height: 100%;
-    position: relative;
-  }
-
-  .home.blurred-container {
-    filter: blur(2px);
-  }
-
-  .graphic>.title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .title>.inner-title {
-    margin: 10% auto;
-    width: 85%;
-    text-align: left;
-    /* padding: 1rem; */
-  }
-
-  .inner-title>h1 {
-    font-size: 40px;
-    font-family: var(--p-type);
-  }
-
-  .inner-title>h1>span {
-    vertical-align: super;
-    font-size: 25px;
-  }
-
-  .graphic>.canvas-container {
-    position: absolute;
-    width: 100%;
-    height: 95%;
-    top: 0;
-    z-index: 2;
-  }
-
-  .home>.searchbar {
-    height: 10%;
-    position: absolute;
-    width: 100%;
-    bottom: 5%;
-    z-index: 2;
-  }
-
-  .searchbar>.search-bar {
-    width: 80%;
-    margin: 0 auto;
-  }
-
-  header {
-    height: 5%;
-  }
-
-  header>.container,
-  .container>.inner-container,
-  .top-menu {
-
-    height: 100%;
-  }
-
-  .canvas-container>.canvas-inner-container {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-  }
-
-  .top-menu>ul {
-    height: 100%;
-    list-style-type: none;
-    text-align: left;
-    font-family: var(--h1-type);
-    padding-left: 1rem;
+  footer,
+  header,
+  .top-menu>ul>li {
+    font-size: 20px;
   }
 
   .top-menu>ul>li {
-    display: inline-block;
-    line-height: 250%;
-    width: 100%;
-    height: 100%;
-    background: url('@/assets/img/wave.svg') no-repeat;
-    background-position: left center;
-    background-size: 60px;
-    padding-left: 70px;
-  }
-}
-
-@media (min-width: 480px) {
-  body {
-    background-color: lightblue;
+    line-height: 220%;
   }
 
 }
 
-@media (min-width: 600px) {
+@media screen and (min-width:1280px) {
 
-  body {
-    background-color: sandybrown;
+  .title>.inner-title,
+  .searchbar>.search-bar {
+    width: 50%;
   }
 }

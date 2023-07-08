@@ -76,7 +76,7 @@ export default {
            
             this.light =  new THREE.AmbientLight( 0xffffff );
 
-            this.grid = new THREE.GridHelper(25, 10,  0x82C3FF, 0x3E9AEF );
+            this.grid = new THREE.GridHelper(100, 20,  0x82C3FF, 0x3E9AEF );
             this.grid.geometry.rotateY( -Math.PI / 2 );
             this.grid.position.y = -4
             this.scene.fog = new THREE.Fog(0xffffff,10, 25);

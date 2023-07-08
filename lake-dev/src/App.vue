@@ -17,7 +17,6 @@ export default {
   },
   methods: {
     updateClass(value) {
-      // console.log(value)
       this.footerActive = value
     }
   }

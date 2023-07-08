@@ -63,18 +63,11 @@ export default {
 </script>
 
 <template>
-  <div class="home container" :class="{'blurred-container': footerActive}">
+  <div 
+    class="home container" 
+    :class="{'blurred-container': footerActive}"
+  >
     <div class="graphic container-inner">
-      <div class="title">
-        <div class="inner-title" v-if="selectedLake === undefined || selectedLake === null">
-          <h1>{{dailyWaterConsumption}} Mln m<span class="super">3</span> is the water consumed daily by Berliners.</h1>
-        </div>
-        <div class="inner-title" v-else>
-          <h1>
-            It would take {{ currentConsumption }} times a day the volume of {{ selectedLake.name }} to fulfil it.
-          </h1>
-        </div>
-      </div>
       <div class="canvas-container">
         <div class="canvas-inner-container" ref="canvas-inner"> 
           <ThreejsCanva 
@@ -85,6 +78,19 @@ export default {
             :dailyWaterConsumption=dailyWaterConsumption
             @onChangeConsumption="updateConsumption"
           />
+        </div>
+      </div>
+            <div class="title">
+        <div 
+          class="inner-title" 
+          v-if="selectedLake === undefined || selectedLake === null"
+        >
+        <h1>{{dailyWaterConsumption}} Mln m<span class="super">3</span> is the water consumed daily by Berliners.</h1>
+        </div>
+        <div class="inner-title" v-else>
+          <h1>
+            It would take {{ currentConsumption }} times a day the volume of {{ selectedLake.name }} to fulfil it.
+          </h1>
         </div>
       </div>
     </div>
