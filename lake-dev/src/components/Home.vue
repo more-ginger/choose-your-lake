@@ -1,6 +1,6 @@
 <script>
 import Dropdown from 'primevue/dropdown';
-import ThreejsCanva from './Threejs-Canva.vue'
+import ThreejsCanva from './ThreejsCanva.vue'
 import { ref } from "vue";
 import lakesID from '@/assets/data/lakes-water-volume.json' 
 
@@ -34,6 +34,7 @@ export default {
   },
   data () {
     return {
+      lakesID,
       allLakes,
       selectedLake,
       canvasWidth: 0,
@@ -44,9 +45,26 @@ export default {
       isBlurred: false
     }
   },
+  computed: {
+    // selectedLake: {
+    //   get() {
+    //     return selectedLake === undefined ? '' : selectedLake 
+    //   },
+    //   set(value) {
+    //     this.$router.replace({  
+    //       query: {
+    //         ...this.$route.query,
+    //         your_query_param: value.id
+    //       }
+    //     })
+    //   }
+    // }
+  },
   mounted () {
     this.getContainerSizes()
     this.mounted = true
+
+    console.log(this.selectedLake)
   },
   methods: {
     getContainerSizes(){
@@ -54,10 +72,30 @@ export default {
       this.canvasHeight = this.$refs['canvas-inner'].clientHeight
     },
     updateConsumption(value) {
-      this.currentConsumption = value
+      this.currentConsumption = value 
     }
   },
-
+  watch: {
+    selectedLake(newVal) {
+      if (newVal !== undefined && newVal !== null) {
+        this.$router.push(
+          { query: 
+            { 
+              ...this.$router.currentRoute.value.query, 
+              lake: newVal.id 
+            } 
+          });
+      } else {
+        this.$router.replace({'query': null});
+      }
+    },
+    '$route.query.lake': function(val){
+      // very inelegant solution to pass a proxy target, maybe change?
+      const lakeId = this.allLakes.filter(el => el.id === val)
+      const stringifyLakeId = JSON.parse(JSON.stringify(lakeId))
+      this.selectedLake = stringifyLakeId[0]
+    }
+  }
 }
 
 </script>

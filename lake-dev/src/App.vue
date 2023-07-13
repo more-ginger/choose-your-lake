@@ -1,5 +1,6 @@
 <script>
 import Home from "./components/Home.vue";
+import LakesMap from "./components/Map.vue";
 import TopBar from "./components/TopBar.vue";
 import BottomBar from "./components/BottomBar.vue";
 
@@ -7,17 +8,22 @@ import BottomBar from "./components/BottomBar.vue";
 export default {
   components: {
     Home,
+    LakesMap,
     TopBar,
     BottomBar,
   },
   data () {
     return {
-      footerActive: false
+      footerActive: false,
+      isMap: false
     }
   },
   methods: {
     updateClass(value) {
       this.footerActive = value
+    },
+    updateMapStatus(value) {
+      this.isMap = value
     }
   }
 };
@@ -26,9 +32,10 @@ export default {
 <template>
   <main>
     <header >
-      <top-bar />
+      <top-bar @onMapToggle="updateMapStatus"/>
     </header>
-    <Home :footerActive="footerActive"/>
+    <Home :footerActive="footerActive" v-if="isMap === false"/>
+    <lakes-map v-if="isMap"/>
     <bottom-bar @onFooterChange="updateClass"/>
   </main>
 </template>

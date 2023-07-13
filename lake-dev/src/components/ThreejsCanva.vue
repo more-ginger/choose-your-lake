@@ -1,7 +1,6 @@
 <script>
 import * as THREE from 'three'
 import * as d3geo from 'd3-geo'
-import * as scale from 'd3-scale'
 import Lakes from '@/assets/data/berlin-bb-lakes.json'
 
 
@@ -76,7 +75,7 @@ export default {
            
             this.light =  new THREE.AmbientLight( 0xffffff );
 
-            this.grid = new THREE.GridHelper(100, 20,  0x82C3FF, 0x3E9AEF );
+            this.grid = new THREE.GridHelper(20, 5,  0x82C3FF, 0x004590 );
             this.grid.geometry.rotateY( -Math.PI / 2 );
             this.grid.position.y = -4
             this.scene.fog = new THREE.Fog(0xffffff,10, 25);
@@ -102,6 +101,20 @@ export default {
                 }),
                 new THREE.MeshToonMaterial({
                 color: 0x82C3FF,
+                transparent: true,
+                opacity: 0.7,
+                side: THREE.DoubleSide
+                }),
+                ,
+                new THREE.MeshToonMaterial({
+                color: 0xFD5757,
+                transparent: true,
+                opacity: 0.5,
+                side: THREE.DoubleSide
+                }),
+                ,
+                new THREE.MeshToonMaterial({
+                color: 0xFD5757,
                 transparent: true,
                 opacity: 0.7,
                 side: THREE.DoubleSide
@@ -185,6 +198,12 @@ export default {
                 const lakeGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
                 lakeGeometry.groups[0].materialIndex = 2
                 lakeGeometry.groups[1].materialIndex = 1
+
+                if(index>0) {
+                    lakeGeometry.groups[0].materialIndex = 4
+                    lakeGeometry.groups[1].materialIndex = 4
+                }
+
                 const lakeShape = new THREE.Mesh(lakeGeometry, materials);
                 lakeShape.scale.set(6, 6, 1)
                 lakeShape.rotation.x = -Math.PI / 2;
