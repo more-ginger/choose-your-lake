@@ -61890,7 +61890,8 @@
         "@id": "way/14438213",
         "name": "Spektelake",
         "natural": "water",
-        "water": "lake"
+        "water": "lake",
+        "wikidata": "way/14438213"
       },
       "geometry": {
         "type": "Polygon",

@@ -15,7 +15,8 @@ export default {
   data () {
     return {
       footerActive: false,
-      isMap: false
+      isMap: false,
+      lakeIDFromMap: undefined
     }
   },
   methods: {
@@ -23,7 +24,14 @@ export default {
       this.footerActive = value
     },
     updateMapStatus(value) {
-      this.isMap = value
+      if (value.isMap !== undefined) {
+         this.isMap = value.isMap
+         this.lakeIDFromMap = value.lakeID
+
+         console.log('id lake from map in updateMapStatus', this.lakeIDFromMap)
+      } else {
+         this.isMap = value
+      }
     }
   }
 };
@@ -34,8 +42,12 @@ export default {
     <header >
       <top-bar @onMapToggle="updateMapStatus"/>
     </header>
-    <Home :footerActive="footerActive" v-if="isMap === false"/>
-    <lakes-map v-if="isMap"/>
+    <Home 
+      :footerActive="footerActive" 
+      v-if="isMap === false" 
+      :lakeIDFromMap="lakeIDFromMap"
+    />
+    <lakes-map v-if="isMap" @onMapToggle="updateMapStatus"/>
     <bottom-bar @onFooterChange="updateClass"/>
   </main>
 </template>

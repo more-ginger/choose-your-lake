@@ -28,7 +28,7 @@ export default {
             if (this.currentLakeID !== '') {
                 this.LakesFeatures.forEach(el => {
                     if (el.properties.wikidata === this.currentLakeID) {
-                        console.log(el.properties.wikidata)
+                        // console.log(el.properties.wikidata)
                         feature = el
                     }
                 })
@@ -44,14 +44,22 @@ export default {
         }
     },
     mounted() {
-        this.context = 'mounted'
-        this.init()
-        this.animate()
-        // console.log('i am mounted')
+        
+        if (this.selectedLake !== undefined) {
+            this.context = 'updatedFromMap'
+            this.updateLakeSelection(this.selectedLake)
+            console.log(this.lakeFeature)
+            this.init(this.lakeFeature)
+            // this.animate()
+        } else {
+            this.context = 'mounted'
+            this.init()
+            this.animate()
+        }
+        
         this.$refs.canvas.appendChild(this.renderer.domElement)
     },
     updated () {
-        // console.log('i am in updated', this.lakeFeature.properties.name)
         this.context = 'updated'
         this.$refs.canvas.removeChild(this.renderer.domElement)
         this.init(this.lakeFeature)
@@ -59,7 +67,6 @@ export default {
         this.$refs.canvas.appendChild(this.renderer.domElement)
     }, 
     methods: {
-
         init(lakePath) {
             
             this.scene = new THREE.Scene()
@@ -122,6 +129,7 @@ export default {
             ]
 
             console.log("initiation done");
+            console.log(lakePath)
 
             //decide which shape should be added
             if (lakePath) {  
@@ -144,7 +152,6 @@ export default {
         animate: function(lakePath) {
             requestAnimationFrame(this.animate)
             this.renderer.render(this.scene, this.camera)
-            // console.log(lakePath)
             this.grid.rotation.y += 0.005
             if (this.context !== 'mounted') {
                 this.group.rotation.y += 0.005
@@ -271,19 +278,21 @@ export default {
             // this.defaultGlassGroup.position.y = 2
             this.scene.add(this.defaultGlassGroup)
         },
+        updateLakeSelection(currentLake) {
+            this.currentLake = currentLake === undefined ? '' : currentLake.name
+            this.currentLakeID = currentLake === undefined ? '' : currentLake.id
+            this.currentLakeVolume = currentLake === undefined 
+                || currentLake.volume === undefined ? 0 : currentLake.volume
 
+            const waterConsumptionPretty = this.waterConsumption.toFixed(1)
+            console.log(this.waterConsumption)
+            this.$emit('onChangeConsumption', waterConsumptionPretty)
+        }
     },
     watch: {
         // changes current lake to display new glass
         selectedLake(newVal, oldVal) {
-            this.currentLake = newVal === undefined ? '' : newVal.name
-            this.currentLakeID = newVal === undefined ? '' : newVal.id
-            this.currentLakeVolume = newVal === undefined 
-                || newVal.volume === undefined ? 0 : newVal.volume
-
-            const waterConsumptionPretty = this.waterConsumption.toFixed(1)
-            this.$emit('onChangeConsumption', waterConsumptionPretty)
-            // console.log(newVal)
+            this.updateLakeSelection(newVal)
         }
     }
 }

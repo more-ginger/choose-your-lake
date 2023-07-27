@@ -10,7 +10,7 @@ const selectedLake = ref();
 const lakesArray = [];
 const lakesKeys = Object.keys(lakesID)
 
-const lakes = lakesKeys.forEach(id => {
+lakesKeys.forEach(id => {
   const currentLake = lakesID[id]
   if (lakesID[id]['portability(m3)'] !== "undefined") {
       lakesArray.push({
@@ -26,7 +26,8 @@ const allLakes = ref(sortedLakesArray)
 
 export default {
   props: {
-    footerActive: Boolean
+    footerActive: Boolean,
+    lakeIDFromMap: String
   },
   components: {
     Dropdown,
@@ -45,26 +46,22 @@ export default {
       isBlurred: false
     }
   },
-  computed: {
-    // selectedLake: {
-    //   get() {
-    //     return selectedLake === undefined ? '' : selectedLake 
-    //   },
-    //   set(value) {
-    //     this.$router.replace({  
-    //       query: {
-    //         ...this.$route.query,
-    //         your_query_param: value.id
-    //       }
-    //     })
-    //   }
-    // }
-  },
   mounted () {
-    this.getContainerSizes()
-    this.mounted = true
+    if (this.lakeIDFromMap !== undefined) {
+      const filterResult = sortedLakesArray.filter(lake => lake.id === this.lakeIDFromMap)
+      this.selectedLake = filterResult[0]
+    }
 
-    console.log(this.selectedLake)
+    this.getContainerSizes()
+    this.mounted = true    
+  },
+  computed: {
+    answerLabel() {
+      return this.currentConsumption >= 1 ? 'No' : 'Yes'
+    },
+    consumptionLabel() {
+      return Math.trunc(this.dailyWaterConsumption / 1000)
+    }
   },
   methods: {
     getContainerSizes(){
@@ -76,6 +73,9 @@ export default {
     }
   },
   watch: {
+    lakeIDFromMap(newVal) {
+      console.log('in watch', this.lakesID[newVal])
+    },
     selectedLake(newVal) {
       if (newVal !== undefined && newVal !== null) {
         this.$router.push(
@@ -118,16 +118,28 @@ export default {
           />
         </div>
       </div>
-            <div class="title">
+      <div class="title">
+        <div class="additional-description">
+        <p>
+          That's a lot of water! What if we wouldn't be able to use groundwater anymore?
+          Would the lakes of Berlin keep up with our daily consumption?
+        </p>
+       </div>
         <div 
           class="inner-title" 
           v-if="selectedLake === undefined || selectedLake === null"
         >
-        <h1>{{dailyWaterConsumption}} Mln m<span class="super">3</span> is the water consumed daily by Berliners.</h1>
+        <h1>
+          Berliners consume
+          {{consumptionLabel}} Tsd m<span class="super">3</span> 
+          of water each day.
+        </h1>
         </div>
         <div class="inner-title" v-else>
           <h1>
-            It would take {{ currentConsumption }} times a day the volume of {{ selectedLake.name }} to fulfil it.
+            {{answerLabel}}, we would need 
+            {{ currentConsumption }} times a day the volume of 
+            {{ selectedLake.name }} to fulfil it.
           </h1>
         </div>
       </div>

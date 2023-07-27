@@ -27,7 +27,7 @@ export default {
     <div class="inner-container">
       <nav class="top-menu">
         <ul>
-          <li><a @click="toggleMap">Map</a></li>
+          <li><a @click="toggleMap">Switch to map</a></li>
         </ul>
       </nav>
     </div>

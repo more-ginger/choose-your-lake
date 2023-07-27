@@ -152,7 +152,7 @@
         "name": "Machnower See"
     },
     "Q568396": {
-        "portability(m3)": 543,
+        "portability(m3)": 543328,
         "name": "Krumme Lanke"
     },
     "Q1236813": {
@@ -160,7 +160,7 @@
         "name": "Waldsee"
     },
     "Q541313": {
-        "portability(m3)": 274750,
+        "portability(m3)": 260316,
         "name": "Plötzensee"
     },
     "Q1546905": {
@@ -231,12 +231,16 @@
         "portability(m3)": "undefined",
         "name": "Dewinsee"
     },
+    "way/14438213": {
+        "portability(m3)": 476937,
+        "name": "Spektelake"
+    },
     "Q2355300": {
         "portability(m3)": "undefined",
         "name": "Streesee"
     },
     "Q15111868": {
-        "portability(m3)": "undefined",
+        "portability(m3)": 420771,
         "name": "Großer Spektesee"
     },
     "Q95147113": {
@@ -376,7 +380,7 @@
         "name": "Schmöldesee"
     },
     "Q1595306": {
-        "portability(m3)": "undefined",
+        "portability(m3)": 1917019,
         "name": "Heiliger See"
     },
     "Q2130994": {
