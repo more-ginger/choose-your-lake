@@ -1,6 +1,6 @@
 <script>
 import Home from "./components/Home.vue";
-import LakesMap from "./components/Map.vue";
+// import LakesMap from "./components/Map.vue";
 import TopBar from "./components/TopBar.vue";
 import BottomBar from "./components/BottomBar.vue";
 
@@ -8,7 +8,7 @@ import BottomBar from "./components/BottomBar.vue";
 export default {
   components: {
     Home,
-    LakesMap,
+    // LakesMap,
     TopBar,
     BottomBar,
   },
@@ -47,7 +47,7 @@ export default {
       v-if="isMap === false" 
       :lakeIDFromMap="lakeIDFromMap"
     />
-    <lakes-map v-if="isMap" @onMapToggle="updateMapStatus"/>
+    <!-- <lakes-map v-if="isMap" @onMapToggle="updateMapStatus"/> -->
     <bottom-bar @onFooterChange="updateClass"/>
   </main>
 </template>

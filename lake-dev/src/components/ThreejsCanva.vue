@@ -48,7 +48,7 @@ export default {
         if (this.selectedLake !== undefined) {
             this.context = 'updatedFromMap'
             this.updateLakeSelection(this.selectedLake)
-            console.log(this.lakeFeature)
+            // console.log(this.lakeFeature)
             this.init(this.lakeFeature)
             // this.animate()
         } else {
@@ -128,24 +128,24 @@ export default {
                 })
             ]
 
-            console.log("initiation done");
-            console.log(lakePath)
+            // console.log("initiation done");
+            // console.log(lakePath)
 
             //decide which shape should be added
             if (lakePath) {  
                 if (Object.hasOwn(lakePath, 'type')) {
-                    console.log('render lake')
+                    // console.log('render lake')
                     // this.grid.position.y = 0
                     this.camera.position.z = 10
                     this.camera.position.y = 8
                     this.buildLakeShape(lakePath, materials)
                 } else {
-                    console.log('render cube')
+                    // console.log('render cube')
                     this.buildDefaultGlass(materials)
                 }
                 
             } else {
-                console.log('render cube')
+                // console.log('render cube')
                 this.buildDefaultGlass(materials)
             }
         },
@@ -285,7 +285,7 @@ export default {
                 || currentLake.volume === undefined ? 0 : currentLake.volume
 
             const waterConsumptionPretty = this.waterConsumption.toFixed(1)
-            console.log(this.waterConsumption)
+            // console.log(this.waterConsumption)
             this.$emit('onChangeConsumption', waterConsumptionPretty)
         }
     },

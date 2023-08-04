@@ -10,12 +10,10 @@ export default {
     }
   },
   methods: {
-    toggleMap(event) {
+    resetModel(event) {
       if (event) {
         // console.log(this.isOpen)
-        this.isMap = !this.isMap
-        console.log(this.isMap)
-        this.$emit('onMapToggle', this.isMap)
+        this.$router.replace({'query': null});
       }
     }
   }
@@ -27,7 +25,9 @@ export default {
     <div class="inner-container">
       <nav class="top-menu">
         <ul>
-          <li><a @click="toggleMap">Switch to map</a></li>
+          <li @click="resetModel">
+            <!-- <a @click="toggleMap">See it on the map</a> -->
+          </li>
         </ul>
       </nav>
     </div>

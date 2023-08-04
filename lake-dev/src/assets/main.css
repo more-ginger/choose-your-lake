@@ -11,6 +11,11 @@ header {
 
 }
 
+.p-dropdown-label,
+.p-dropdown-items {
+  font-size: 24px;
+}
+
 footer {
   z-index: 2;
   text-align: left;
@@ -104,7 +109,7 @@ a,
 
 .title>.inner-title {
   margin: 10% auto;
-  margin-top: 2%;
+  /* margin-top: 2%; */
   width: 85%;
   text-align: left;
   mix-blend-mode: color-burn;
@@ -115,17 +120,35 @@ a,
 .inner-title>h1 {
   font-size: 40px;
   font-family: var(--p-type);
+  line-height: 50px;
 }
 
-.inner-title>h1>span {
+.inner-title>h1>b>span.super {
   vertical-align: super;
-  font-size: 25px;
+  font-size: 14px;
+  font-family: var(--h1-type);
+}
+
+.inner-title>h1>b {
+  font-family: var(--h1-type);
+}
+
+b.insufficient {
+  color: red;
+}
+
+b.sufficient {
+  color: blue;
+}
+
+strong {
+  font-weight: bold;
 }
 
 .graphic>.canvas-container {
   position: absolute;
   width: 100%;
-  height: 95%;
+  height: 100%;
   top: 0;
   z-index: 0;
 }
@@ -134,7 +157,7 @@ a,
   height: 10%;
   position: absolute;
   width: 100%;
-  bottom: 10%;
+  bottom: 5%;
   z-index: 2;
 }
 
@@ -144,11 +167,13 @@ a,
 }
 
 .title>.additional-description {
-  width: 90%;
+  font-family: var(--p-type);
+  width: 80%;
   margin: 0 auto;
   text-align: left;
-  font-size: 12px;
+  /* font-size: 12px; */
   margin-top: 1rem;
+  mix-blend-mode: color-burn;
 }
 
 header {
@@ -225,15 +250,28 @@ main {
   height: 100%;
 }
 
+.calculations,
+.credits,
+.context,
+.legend {
+  margin-top: 5%;
+}
+
+.legend>h1 {
+  line-height: initial;
+}
+
+.calculations>p,
+.credits>p,
+.context>p,
+.legend>p {
+  margin-top: 5%;
+}
+
 @media screen and (min-width:600px) {
 
   .home>.container-inner>.title>.inner-title>h1 {
     font-size: 60px;
-  }
-
-  .p-dropdown-label,
-  .p-dropdown-items {
-    font-size: 24px;
   }
 
   footer,

@@ -56,8 +56,8 @@ export default {
     this.mounted = true    
   },
   computed: {
-    answerLabel() {
-      return this.currentConsumption >= 1 ? 'No' : 'Yes'
+    classOfConsumption() {
+      return this.currentConsumption > 1 ? 'insufficient' : 'sufficient'
     },
     consumptionLabel() {
       return Math.trunc(this.dailyWaterConsumption / 1000)
@@ -73,9 +73,6 @@ export default {
     }
   },
   watch: {
-    lakeIDFromMap(newVal) {
-      console.log('in watch', this.lakesID[newVal])
-    },
     selectedLake(newVal) {
       if (newVal !== undefined && newVal !== null) {
         this.$router.push(
@@ -119,29 +116,27 @@ export default {
         </div>
       </div>
       <div class="title">
-        <div class="additional-description">
-        <p>
-          That's a lot of water! What if we wouldn't be able to use groundwater anymore?
-          Would the lakes of Berlin keep up with our daily consumption?
-        </p>
-       </div>
         <div 
           class="inner-title" 
           v-if="selectedLake === undefined || selectedLake === null"
         >
         <h1>
-          Berliners consume
-          {{consumptionLabel}} Tsd m<span class="super">3</span> 
-          of water each day.
+          In Berlin, we consume <b>{{consumptionLabel}} Tsd m<span class="super">3</span></b>
+          of water every day.
         </h1>
         </div>
         <div class="inner-title" v-else>
           <h1>
-            {{answerLabel}}, we would need 
-            {{ currentConsumption }} times a day the volume of 
-            {{ selectedLake.name }} to fulfil it.
+            We would need <b :class="classOfConsumption">{{ currentConsumption < 0.1 ? "less than 0.1" : currentConsumption }} times</b> the volume of <b>{{ selectedLake.name }}&nbsp;</b> 
+             to fulfil the daily water needs of Berlin.
           </h1>
         </div>
+        <div class="additional-description" v-if="selectedLake === undefined || selectedLake === null">
+          <p>
+            Sounds like a lot, right? But how much is that, really?
+            Select a Berlin/Brandenburg lake from the list below and see.
+          </p>
+       </div>
       </div>
     </div>
     <div class="searchbar container-inner">
