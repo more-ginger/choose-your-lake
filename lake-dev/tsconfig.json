@@ -3,10 +3,14 @@
       "./src/**/*"
     ],
     "compilerOptions": {
-      "module": "es2015",
+      "module": "ESNext",
       "moduleResolution": "node",
-      "target": "es5",
+      "target": "ESNext",
+      "types": ["vite/client"],
+      // "type": "module",
       "sourceMap": true,
-      "allowJs": true
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true
     }
 }

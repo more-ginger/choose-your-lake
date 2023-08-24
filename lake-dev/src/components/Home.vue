@@ -3,7 +3,7 @@ import Dropdown from 'primevue/dropdown';
 import ThreejsCanva from './ThreejsCanva.vue'
 import { ref } from "vue";
 import lakesID from '@/assets/data/lakes-water-volume.json' 
-
+import { useI18n } from 'vue-i18n';
 // const eventHub = new Vue();
 
 const selectedLake = ref();
@@ -24,7 +24,17 @@ lakesKeys.forEach(id => {
 const sortedLakesArray = lakesArray.sort((a, b) => a.name.localeCompare(b.name))
 const allLakes = ref(sortedLakesArray)
 
+// const { t } = useI18n();
+// console.log(t)
+
 export default {
+  setup() {
+        const { t } = useI18n();
+        // console.log(t())
+        console.log(t('message.greeting'))
+        return { t }
+      // then use it like t('message.greeting')
+  },
   props: {
     footerActive: Boolean,
     lakeIDFromMap: String
@@ -116,12 +126,13 @@ export default {
         </div>
       </div>
       <div class="title">
+        <div>{{ t('message.greeting') }}</div>
         <div 
           class="inner-title" 
           v-if="selectedLake === undefined || selectedLake === null"
         >
         <h1>
-          In Berlin, we consume <b>{{consumptionLabel}} Tsd m<span class="super">3</span></b>
+          {{t('message.greeting')}} <b>{{consumptionLabel}} Tsd m<span class="super">3</span></b>
           of water every day.
         </h1>
         </div>
