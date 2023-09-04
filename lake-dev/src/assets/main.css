@@ -41,12 +41,16 @@ footer>.container {
 
 footer>.container>.inner-container {
   width: 100%;
-  padding-left: 1rem;
+  padding: 0 1rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
+}
+
+footer.opened-footer>.container {
+  height: fit-content;
 }
 
 footer.opened-footer>.container>.inner-container {
@@ -140,7 +144,9 @@ b.insufficient {
   color: red;
 }
 
-b.sufficient {
+b.sufficient,
+.en-active,
+.de-active {
   color: blue;
 }
 
@@ -160,7 +166,7 @@ strong {
   height: 10%;
   position: absolute;
   width: 100%;
-  bottom: 5%;
+  bottom: 10%;
   z-index: 2;
 }
 
@@ -177,6 +183,17 @@ strong {
   /* font-size: 12px; */
   margin-top: 1rem;
   mix-blend-mode: color-burn;
+}
+
+.title>.additional-description>.lake-description {
+  font-size: 16px;
+  z-index: 1;
+}
+
+.title>.additional-description>.lake-description>span {
+  display: block;
+  width: fit-content;
+  border-bottom: 3px solid var(--color-border);
 }
 
 header {
@@ -197,6 +214,8 @@ header>.container,
 
 .top-menu>ul {
   height: 100%;
+  width: 100%;
+  display: inline-flex;
   list-style-type: none;
   text-align: left;
   font-family: var(--h1-type);
@@ -205,7 +224,7 @@ header>.container,
 
 .top-menu>ul>li {
   display: inline-block;
-  line-height: 220%;
+  /* line-height: 220%; */
   width: 100%;
   height: 100%;
   background: url('@/assets/img/wave.svg') no-repeat;
@@ -213,6 +232,26 @@ header>.container,
   background-size: 60px;
   padding-left: 70px;
   font-size: 18px;
+
+}
+
+.top-menu>ul>li.logo {
+  width: 0;
+}
+
+.top-menu>ul>language-container {
+  display: inline-flex;
+  position: absolute;
+  right: 5%;
+}
+
+.top-menu>ul>language-container>li.language {
+  background: none;
+  padding-left: 0;
+  width: 30px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 40px;
 }
 
 .home,
@@ -271,10 +310,12 @@ main {
   margin-top: 5%;
 }
 
-@media screen and (min-width:600px) {
+@media screen and (max-width:600px) {
 
   .home>.container-inner>.title>.inner-title>h1 {
-    font-size: 60px;
+    margin-top: 25%;
+    font-size: 55px;
+    line-height: 70px;
   }
 
   footer,
@@ -289,14 +330,89 @@ main {
 
 }
 
+@media screen and (min-width:600px) {
+
+  .home>.container-inner>.title>.inner-title {
+    width: 80%;
+  }
+
+  .home>.container-inner>.title>.inner-title>h1 {
+    margin-top: 15%;
+    font-size: 60px;
+    line-height: 70px;
+  }
+}
+
 
 @media screen and (min-width:1280px) {
 
   .title>.inner-title,
   .searchbar>.search-bar,
   .title>.additional-description {
-    width: 50%;
+    width: 65%;
   }
+
+  .title>.inner-title {
+    margin-top: 10%;
+    margin-bottom: 2.5%;
+  }
+
+  .home>.container-inner>.title>.inner-title>h1 {
+    font-size: 55px;
+  }
+
+  .title>.inner-title>h1 {
+    line-height: initial;
+
+    /* background-color: pink; */
+  }
+
+  .home>.searchbar {
+    bottom: 10%;
+  }
+
+  .top-menu>ul>language-container {
+    display: inline-flex;
+    position: absolute;
+    right: 2%;
+  }
+}
+
+
+.title>.additional-description>p {
+  margin: 0 auto;
+  font-size: 24px;
+  /* background-color: pink; */
+}
+
+footer {
+  height: 5.5%;
+}
+
+/* footer>.container>.inner-container {
+  height: 100%;
+} */
+
+footer>.container>.inner-container>p {
+  font-size: 18px;
+}
+
+.calculations,
+.credits,
+.context,
+.legend {
+  margin-top: 2.5%;
+}
+
+.calculations>p,
+.credits>p,
+.context>p,
+.legend>p {
+  margin-top: 1rem;
+}
+
+.open-footer-content {
+  margin-bottom: 5%;
 }
 
 .title>.inner-title {

@@ -3,8 +3,9 @@ import Dropdown from 'primevue/dropdown';
 import ThreejsCanva from './ThreejsCanva.vue'
 import { ref } from "vue";
 import lakesID from '@/assets/data/lakes-water-volume.json' 
+import LakesData from '@/assets/data/berlin-bb-lakes.json'
+import * as d3geo from 'd3-geo';
 import { useI18n } from 'vue-i18n';
-// const eventHub = new Vue();
 
 const selectedLake = ref();
 const lakesArray = [];
@@ -31,9 +32,17 @@ export default {
   setup() {
         const { t } = useI18n();
         // console.log(t())
-        console.log(t('message.greeting'))
-        return { t }
+        // console.log(t('message.greeting'))
+        let selectionPlaceholder = t('dropdown.selection-label')
+        let quantityPlaceholder = t('lake.quantity')
+        return { t, selectionPlaceholder, quantityPlaceholder }
       // then use it like t('message.greeting')
+  },
+  metaInfo: {
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ]
   },
   props: {
     footerActive: Boolean,
@@ -46,6 +55,7 @@ export default {
   data () {
     return {
       lakesID,
+      LakesData,
       allLakes,
       selectedLake,
       canvasWidth: 0,
@@ -71,6 +81,15 @@ export default {
     },
     consumptionLabel() {
       return Math.trunc(this.dailyWaterConsumption / 1000)
+    },
+    lakeCoords () {
+      const currentLake = this.LakesData.features.filter((a,b) => a.properties.wikidata === this.selectedLake.id)
+      const currentLakeCentroid = d3geo.geoPath().centroid(currentLake[0].geometry)
+      const lat = Math.round(currentLakeCentroid[0] * 100000) / 100000
+      const lon = Math.round(currentLakeCentroid[1] * 100000) / 100000
+      // const url = `http://www.google.com/maps/place/${currentLakeCentroid}`
+      console.log(currentLakeCentroid)
+      return {lakeUrl: `${currentLakeCentroid[1]}, ${currentLakeCentroid[0]}`, label: `${lat}, ${lon}`}
     }
   },
   methods: {
@@ -101,6 +120,10 @@ export default {
       const lakeId = this.allLakes.filter(el => el.id === val)
       const stringifyLakeId = JSON.parse(JSON.stringify(lakeId))
       this.selectedLake = stringifyLakeId[0]
+    }, 
+    '$i18n.locale': function(lan){
+      this.selectionPlaceholder = this.t('dropdown.selection-label')
+      this.quantityPlaceholder = this.t('lake.quantity')
     }
   }
 }
@@ -132,20 +155,28 @@ export default {
           v-if="selectedLake === undefined || selectedLake === null"
         >
         <h1>
-          {{t('message.greeting')}} <b>{{consumptionLabel}} Tsd m<span class="super">3</span></b>
-          of water every day.
+          {{t('home.paragraph-one')}} <b>{{consumptionLabel}} Tsd m<span class="super">3</span></b>
+          {{t('home.paragraph-two')}}
         </h1>
         </div>
         <div class="inner-title" v-else>
           <h1>
-            We would need <b :class="classOfConsumption">{{ currentConsumption < 0.1 ? "less than 0.1" : currentConsumption }} times</b> the volume of <b>{{ selectedLake.name }}&nbsp;</b> 
-             to fulfil the daily water needs of Berlin.
+            {{t('lake.par-1')}} 
+            <b :class="classOfConsumption">
+              {{ currentConsumption < 0.1 ? quantityPlaceholder : currentConsumption }} 
+              {{t('lake.par-timelabel')}}</b> {{t('lake.par-1-2')}} 
+              <b>{{ selectedLake.name }}</b>{{t('lake.par-1-3')}}.
           </h1>
         </div>
-        <div class="additional-description" v-if="selectedLake === undefined || selectedLake === null">
-          <p>
-            Sounds like a lot, right? But how much is that, really?
-            Select a Berlin/Brandenburg lake from the list below and see.
+        <div class="additional-description">
+          <p v-if="selectedLake === undefined || selectedLake === null">
+            {{t('home.description')}}
+          </p>
+          <p class="lake-description" v-else>
+             <span>{{t('lake.volume')}} {{selectedLake.volume}} m<span class="super">3</span></span> 
+             <span>{{t('lake.location')}} <a :href="`http://www.google.com/maps/place/${lakeCoords.lakeUrl}`">
+              {{ lakeCoords.label }} &#8594;
+            </a></span>
           </p>
        </div>
       </div>
@@ -156,7 +187,7 @@ export default {
           v-model="selectedLake" 
           :options="allLakes" 
           optionLabel="name" 
-          placeholder="Select a Lake" 
+          :placeholder="selectionPlaceholder" 
           class="w-full md:w-14rem" 
           showClear
         />

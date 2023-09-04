@@ -29,3 +29,5 @@ coverage
 
 #env
 .env
+
+./src/assets/fonts

@@ -1,4 +1,37 @@
 {
-    "welcome": "Wilkommen",
-    "language": "de"
+  "home": {
+    "language": "Deutsch",
+    "paragraph-one": "In Berlin verbrauchen wir täglich",
+    "paragraph-two": "Wasser.",
+    "description": "Klingt nach viel, oder? Aber wie viel ist das wirklich? Wähle einen Bradenburger oder Berliner See aus und sehe selbst."
+  },
+  "lake": {
+    "par-1": "Wir bräuchten das",
+    "quantity": "weniger als 0.1",
+    "par-timelabel": "-fache",
+    "par-1-2": "Volumen des",
+    "par-1-3": ", um den täglichen Wasserbedarf Berlins zu decken",
+    "volume": "Volumen:",
+    "location": "Stelle:"
+  },
+  "dropdown": {
+    "selection-label": "Wähle einen See aus"
+  },
+  "footer": {
+    "footer-title": "Informationen zum Projekt",
+    "title-par-1": "Wie kann ich die Visualisierung lesen?",
+    "par-1": "Sobald ein See ausgewählt ist, wird der 3D Zylinder durch den jeweiligen See ersetzt. Die Seen sind nach ihrem jeweiligen Volumen und ihrer Größe skaliert.",
+    "par-1-1": "Je nach Volumen wird der ausgewählte See einfach oder mehrfach angezeigt. Falls das Volmen des Sees zu gering ist, um den Berliner Tagesbedarf zu decken, wird ein weiterer See in",
+    "par-1-labelcolor": "rot",
+    "par-1-2": "auf den ersten See gestapelt. Dies wird so oft wiederholt bis das nötig Volumen erreicht wird.",
+    "title-par-2":"Kontext",
+    "par-2": "...",
+    "title-par-3": "Berechnungen und Daten",
+    "par-3": "Daten zum täglichen Wasserverbrauch in Berlin: Volumen und Form der Seen: OpenStreetMap,",
+    "par-3-2": " Der tägliche Wasserverbrauch Berlins' ergibt sich aus dem Tagesdurchschnitt basierend auf den Jahresverbrauch von 2022. Der Tagesdurchschnitt wird durch das jeweilige Volumen des ausgewählten Sees geteilt, um den Faktor zu ermitteln.",
+    "title-par-4": "Credits",
+    "concept": "Konzept",
+    "design": "Design und Code:",
+    "feedback": "Danke an Jona Pomerance, Fidel Thomet, Nadia Zeissig und Giacomo Nanni für das Feedback."
   }
+}

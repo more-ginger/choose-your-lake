@@ -1,4 +1,37 @@
- {
-    "welcome": "Welcome",
-    "language": "en"
+{
+  "home": {
+    "language": "English",
+    "paragraph-one": "In Berlin, we consume",
+    "paragraph-two": "of water every day.",
+    "description": "Sounds like a lot, right? But how much is that, really? Select a Berlin or Brandenburg lake from the list below and see."
+  },
+  "lake": {
+    "par-1": "We would need",
+    "quantity": "less than 0.1",
+    "par-timelabel": "times",
+    "par-1-2": "the volume of",
+    "par-1-3": " to fulfil the daily water needs of Berlin",
+    "volume": "Volume:",
+    "location": "Position:"
+  },
+  "dropdown": {
+    "selection-label": "Select a lake"
+  },
+  "footer": {
+    "footer-title": "How does it work?",
+    "title-par-1": "How to read the visualization",
+    "par-1": "By using the dropdown menu, the default cylinder is replaced by the 3D representation of the selected lake. The model is scaled according to its real size and volume.",
+    "par-1-1": "The height of the lakes encode volume: the lake's water capacity. If the lake capacity is insufficient – i.e. its water volume cannot fulfil Berlin's daily consumption – another",
+    "par-1-labelcolor": "red",
+    "par-1-2": "lake is stacked on top of the first one. Stacking is repeated based on how many times the lake capacity is exceeded.",
+    "title-par-2":"Context",
+    "par-2": "...",
+    "title-par-3": "Calculations and data",
+    "par-3": "Data on the daily water consumption of Berlin: Data on lakes' volume and shape: OpenStreetMap,",
+    "par-3-2": " To calculate lake capacity overshoot we divide the overall water consumption in Berlin by the currently selected lake volume.",
+    "title-par-4": "Credits",
+    "concept": "Concept",
+    "design": "Design and code:",
+    "feedback": "Thanks to Jona Pomerance, Fidel Thomet, Nadia Zeissig, Giacomo Nanni for the feedback."
   }
+}
