@@ -29,6 +29,9 @@ export default {
     @click="toggleFooter"
   >
     <div class="container">
+      <div class="close-button-container" @click="toggleFooter">
+        x
+      </div>
       <div class="inner-container">
         <p>{{t('footer.footer-title')}}</p>
         <div class="open-footer-content" v-if="isOpen">

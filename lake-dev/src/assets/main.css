@@ -377,6 +377,11 @@ main {
     position: absolute;
     right: 2%;
   }
+
+  .open-footer-content {
+    width: 60%;
+    margin: 0 auto;
+  }
 }
 
 
