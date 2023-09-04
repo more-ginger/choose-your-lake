@@ -310,7 +310,7 @@ main {
   margin-top: 5%;
 }
 
-@media screen and (max-width:600px) {
+@media screen and (min-width:500px) and (max-width:600px) {
 
   .home>.container-inner>.title>.inner-title>h1 {
     margin-top: 25%;
@@ -334,6 +334,7 @@ main {
 
   .home>.container-inner>.title>.inner-title {
     width: 80%;
+    margin-bottom: 0%;
   }
 
   .home>.container-inner>.title>.inner-title>h1 {
@@ -346,10 +347,10 @@ main {
 
 @media screen and (min-width:1280px) {
 
-  .title>.inner-title,
+  .home>.container-inner>.title>.inner-title,
   .searchbar>.search-bar,
   .title>.additional-description {
-    width: 65%;
+    width: 75%;
   }
 
   .title>.inner-title {
@@ -416,8 +417,8 @@ footer>.container>.inner-container>p {
 }
 
 .title>.inner-title {
-  margin-top: 5%;
-  margin-bottom: 10%;
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 
 .title>.inner-title>h1 {
@@ -467,6 +468,23 @@ footer>.container>.inner-container>p {
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (max-width: 375px) {
+
+  .title>.inner-title {
+    margin-top: 15%;
+
+  }
+
+  .title>.inner-title>h1 {
+    font-size: 30px;
+
+  }
+
+  .title>.additional-description>p {
+    font-size: 18px;
   }
 }
 

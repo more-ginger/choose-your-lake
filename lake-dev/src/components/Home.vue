@@ -149,7 +149,6 @@ export default {
         </div>
       </div>
       <div class="title">
-        <div>{{ t('message.greeting') }}</div>
         <div 
           class="inner-title" 
           v-if="selectedLake === undefined || selectedLake === null"
