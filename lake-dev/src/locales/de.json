@@ -2,8 +2,9 @@
   "home": {
     "language": "Deutsch",
     "paragraph-one": "In Berlin verbrauchen wir täglich",
+    "unit": "Tsd",
     "paragraph-two": "Wasser.",
-    "description": "Klingt nach viel, oder? Aber wie viel ist das wirklich? Wähle einen Bradenburger oder Berliner See aus und sehe selbst."
+    "description": "Klingt nach viel, oder? Aber wie viel ist das wirklich? Wähle einen Brandenburger oder Berliner See aus und sieh selbst."
   },
   "lake": {
     "par-1": "Wir bräuchten das",
@@ -25,7 +26,9 @@
     "par-1-labelcolor": "rot",
     "par-1-2": "auf den ersten See gestapelt. Dies wird so oft wiederholt bis das nötig Volumen erreicht wird.",
     "title-par-2":"Kontext",
-    "par-2": "...",
+    "par-2": "Jede Person in Berlin verbraucht etwa 150 Liter Wasser pro Tag. Darin enthalten sind der private Verbrauch, der 75 % des Gesamtverbrauchs ausmacht, und der industrielle Verbrauch, auf den die restlichen 25 % entfallen. Das Berliner Trinkwasser kommt natürlich nicht aus Seen, sondern aus dem Boden. Im Wesentlichen wird das Grundwasser durch Regen aufgefüllt. Das Berliner Wassersystem kann jedoch als teilweise geschlossener Wasserkreislauf bezeichnet werden, da Abwässer behandelt und teilweise wiederverwendet werden, um das verfügbare Grundwasser zu ergänzen.",
+    "par-2-3": "Der Klimawandel und die zunehmende Verstädterung sind zwei drängende Probleme. Die Niederschläge sind in den letzten Jahren spärlicher geworden, und die Bodenversiegelung verhindert, dass das Wasser in den Untergrund sickert und die vorhandenen Ressourcen wieder auffüllt. Extremereignisse wie heftige Regenfälle und Überschwemmungen erschweren die ordnungsgemäße Filterung des Abwassers. In den nächsten Jahren wird das Berliner Wassersystem zunehmend unter Druck geraten, durch die Natur und durch uns.",
+    "par-2-4": "Diese Visualisierung betrachtet Wasser als endliche Ressource, indem sie unseren täglichen Verbrauch im Vergleich zu den beliebten Seen in Berlin und Brandenburg zeigt. Könnten wir uns nur auf das Oberflächenwasser verlassen, das rund um Berlin sichtbar ist, würden wir sehr schnell mit der Fragilität und Kostbarkeit dieser Ressource konfrontiert werden. Unser Wasserverbrauch spielt eine wichtige Rolle.",
     "title-par-3": "Berechnungen und Daten",
     "par-3": "Daten zum täglichen Wasserverbrauch in Berlin: Volumen und Form der Seen: OpenStreetMap,",
     "par-3-2": " Der tägliche Wasserverbrauch Berlins' ergibt sich aus dem Tagesdurchschnitt basierend auf den Jahresverbrauch von 2022. Der Tagesdurchschnitt wird durch das jeweilige Volumen des ausgewählten Sees geteilt, um den Faktor zu ermitteln.",

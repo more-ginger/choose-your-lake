@@ -88,7 +88,7 @@ export default {
       const lat = Math.round(currentLakeCentroid[0] * 100000) / 100000
       const lon = Math.round(currentLakeCentroid[1] * 100000) / 100000
       // const url = `http://www.google.com/maps/place/${currentLakeCentroid}`
-      console.log(currentLakeCentroid)
+      // console.log(currentLakeCentroid)
       return {lakeUrl: `${currentLakeCentroid[1]}, ${currentLakeCentroid[0]}`, label: `${lat}, ${lon}`}
     }
   },
@@ -154,7 +154,7 @@ export default {
           v-if="selectedLake === undefined || selectedLake === null"
         >
         <h1>
-          {{t('home.paragraph-one')}} <b>{{consumptionLabel}} Tsd m<span class="super">3</span></b>
+          {{t('home.paragraph-one')}} <b>{{consumptionLabel}} {{t('home.unit')}} m<span class="super">3</span></b>
           {{t('home.paragraph-two')}}
         </h1>
         </div>

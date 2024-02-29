@@ -30,7 +30,7 @@ footer {
 
 footer.opened-footer {
   transition: height 0.5s ease;
-  height: 95%;
+  height: 95svh;
   border-top: none;
   z-index: 10;
 }
@@ -256,7 +256,7 @@ header>.container,
 
 .home,
 .map-container {
-  height: 95%;
+  height: 95svh;
   filter: blur(0px);
   transition: filter 0.2s;
 }
@@ -395,9 +395,19 @@ footer {
   height: 5.5%;
 }
 
-/* footer>.container>.inner-container {
+.close-button-container {
+  position: absolute;
+  right: 20px;
+  width: 40px;
   height: 100%;
-} */
+  background: url('@/assets/img/close.svg') no-repeat;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+  cursor: pointer;
+}
 
 footer>.container>.inner-container>p {
   font-size: 18px;
@@ -433,7 +443,6 @@ footer>.container>.inner-container>p {
 .title>.additional-description>p {
   margin: 0 auto;
   font-size: 24px;
-  /* background-color: pink; */
 }
 
 .home>.searchbar {
@@ -444,9 +453,33 @@ footer {
   height: 5.5%;
 }
 
-/* footer>.container>.inner-container {
-  height: 100%;
-} */
+.desktop-water-diagram {
+  display: initial;
+}
+
+.mobile-water-diagram {
+  display: none;
+}
+
+.light-mode {
+  display: initial;
+}
+
+.dark-mode {
+  display: none;
+}
+
+.water-cycle {
+  width: 100%;
+  margin: 1rem 0;
+  /* content: url('@/assets/img/data_diagram_wide.png'); */
+}
+
+.water-measurement {
+  width: 100%;
+  margin: 1rem 0;
+  /* background-color: rgb(232, 229, 223); */
+}
 
 footer>.container>.inner-container>p {
   font-size: 18px;
@@ -477,6 +510,15 @@ footer>.container>.inner-container>p {
 }
 
 @media (max-width: 375px) {
+
+
+  .desktop-water-diagram {
+    display: none;
+  }
+
+  .mobile-water-diagram {
+    display: initial;
+  }
 
   .title>.inner-title {
     margin-top: 15%;
@@ -510,5 +552,17 @@ footer>.container>.inner-container>p {
 
   .title>.inner-title {
     mix-blend-mode: overlay;
+  }
+
+  .light-mode {
+    display: none;
+  }
+
+  .dark-mode {
+    display: initial;
+  }
+
+  .close-button-container {
+    background: url('@/assets/img/close-DARK.svg') no-repeat;
   }
 }

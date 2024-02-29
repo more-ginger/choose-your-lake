@@ -27,8 +27,6 @@ export default {
       if (value.isMap !== undefined) {
          this.isMap = value.isMap
          this.lakeIDFromMap = value.lakeID
-
-         console.log('id lake from map in updateMapStatus', this.lakeIDFromMap)
       } else {
          this.isMap = value
       }
